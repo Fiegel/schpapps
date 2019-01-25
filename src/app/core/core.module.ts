@@ -16,7 +16,8 @@ import { HomeComponent } from './home/home.component';
   ],
   exports: [
     AppRoutingModule,
-    HeaderComponent
+    HeaderComponent,
+    FooterComponent
   ]
 })
 export class CoreModule {
