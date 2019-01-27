@@ -1,0 +1,19 @@
+.footer {
+  background-attachment: scroll;
+  background-clip: border-box;
+  background-color: lightgray;
+  background-origin: padding-box;
+  box-sizing: border-box;
+  display: block;
+  padding: 15px 0;
+  margin-bottom: -70px;
+  margin-top: -17px;
+  height: 70px;
+  line-height: 32px;
+}
+
+.btn-circle {
+  height: 110%;
+  border-radius: 50%;
+  margin: 0 5px;
+}
