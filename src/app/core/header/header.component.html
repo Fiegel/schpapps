@@ -1,14 +1,35 @@
 <nav class="navbar navbar-dark bg-dark text-light">
-  <span class="nav-brand mb-2 h3"><i class="fa fa-star"></i>Schpapps</span>
+  <span class="nav-brand mb-2 h3">
+    <span class="fa-stack">
+      <i class="fa fa-star fa-stack-2x"></i>
+      <i class="fa fa-bullseye fa-stack-1x"></i>
+    </span>
+    Sch<span class="vl">|</span>p<span class="vl">|</span><span class="aa">a</span>pps
+  </span>
   <ul class="nav nav-pills mr-auto">
-    <li class="nav-item">
-      <a class="nav-link">Généalogie</a>
+    <li class="nav-item dropdown"
+        appDropdown>
+      <a class="nav-link"
+         role="button">Généalogie<i class="fa fa-caret-down"></i></a>
+      <div class="dropdown-menu">
+        <a class="dropdown-item">Liste des personnes</a>
+        <a class="dropdown-item">Arbres</a>
+      </div>
     </li>
-    <li class="nav-item">
-      <a class="nav-link">Cuisine</a>
+    <li class="nav-item disabled dropdown"
+        appDropdown>
+      <a class="nav-link"
+         role="button">Cuisine<i class="fa fa-caret-down"></i></a>
+      <div class="dropdown-menu">
+        <a class="dropdown-item">Bientôt</a>
+      </div>
     </li>
-    <li class="nav-item">
-      <a class="nav-link">A Faire</a>
+    <li class="nav-item disabled dropdown"
+        appDropdown>
+      <a class="nav-link disabled">A Faire<i class="fa fa-caret-down"></i></a>
+      <div class="dropdown-menu">
+        <a class="dropdown-item">Bientôt</a>
+      </div>
     </li>
   </ul>
 </nav>

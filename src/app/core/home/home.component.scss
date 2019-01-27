@@ -30,6 +30,19 @@
   padding: 75px 0;
 }
 
-.fa {
-  margin-right: 20px;
+.fa-stack {
+  font-size: 50%;
+  margin-bottom: 20px;
+}
+
+.fa-star {
+  text-shadow: 0 0 40px white;
+}
+
+.fa-bullseye, .aa {
+  color: darkred;
+}
+
+.vl {
+  font-weight: normal;
 }
