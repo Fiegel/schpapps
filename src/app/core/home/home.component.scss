@@ -1,0 +1,35 @@
+.container {
+  text-align: center;
+}
+
+.home-background {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  width: 100%;
+  min-height: 300px;
+  height: 400px;
+  max-height: 500px;
+  box-sizing: border-box;
+  padding: 48px 48px 32px;
+  transform: skewY(8deg);
+  transform-origin: 100%;
+  z-index: -1;
+}
+
+.home-title {
+  min-height: 200px;
+  height: 300px;
+  max-height: 400px;
+  line-height: 100px;
+  font-size: 100px;
+  font-variant: small-caps;
+  font-weight: bold;
+  padding: 75px 0;
+}
+
+.fa {
+  margin-right: 20px;
+}

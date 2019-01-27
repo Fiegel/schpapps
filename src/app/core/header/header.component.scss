@@ -1,8 +1,17 @@
+.navbar {
+  z-index: 1000;
+}
+
 .nav-brand {
+  font-variant: small-caps;
   margin-right: 20px;
+}
+
+.nav-link {
+  font-variant: small-caps;
+  font-size: 1.25em;
 }
 
 .fa {
   margin-right: 5px;
-  transform: rotate(-45deg);
 }
