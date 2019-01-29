@@ -5,15 +5,31 @@
   background-origin: padding-box;
   box-sizing: border-box;
   display: block;
-  padding: 15px 0;
-  margin-bottom: -70px;
+  padding: 5px 0;
+  margin-bottom: -40px;
   margin-top: -17px;
-  height: 70px;
+  height: 40px;
   line-height: 32px;
 }
 
-.btn-circle {
-  height: 110%;
-  border-radius: 50%;
+.footer-author {
+  display: inline-block;
+  font-size: 0.75em;
+}
+
+a {
+  display: inline-block;
+  width: 40px;
+  text-align: center;
+  font-size: 0.75em;
+  text-decoration: none;
+  color: var(--gray);
+}
+
+a:hover {
+  color: var(--gray-dark);
+}
+
+.fa {
   margin: 0 5px;
 }
