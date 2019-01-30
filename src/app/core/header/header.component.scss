@@ -16,6 +16,7 @@
   font-variant: small-caps;
   font-size: 1.25em;
   margin-bottom: 8px;
+  cursor: pointer;
 }
 
 .fa-stack {
@@ -27,13 +28,22 @@
   text-shadow: 0 0 10px white;
 }
 
-.fa-bullseye, .aa {
+.fa-bullseye {
+  padding-top: 1px;
+  color: darkred;
+}
+
+.aa {
   color: darkred;
 }
 
 .fa-caret-down {
   padding-left: 10px;
   font-size: 66%;
+}
+
+.fa-sign-out-alt, .fa-sign-in-alt {
+  padding-left: 10px;
 }
 
 .vl {

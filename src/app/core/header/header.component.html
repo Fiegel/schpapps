@@ -1,8 +1,8 @@
 <nav class="navbar navbar-dark bg-dark text-light">
   <span class="nav-brand mb-2 h3">
     <span class="fa-stack">
-      <i class="fa fa-star fa-stack-2x"></i>
-      <i class="fa fa-bullseye fa-stack-1x"></i>
+      <i class="fas fa-star fa-stack-2x"></i>
+      <i class="fas fa-bullseye fa-stack-1x"></i>
     </span>
     Sch<span class="vl">|</span>p<span class="vl">|</span><span class="aa">a</span>pps
   </span>
@@ -10,7 +10,7 @@
     <li class="nav-item dropdown"
         appDropdown>
       <a class="nav-link"
-         role="button">Généalogie<i class="fa fa-caret-down"></i></a>
+         role="button">Généalogie<i class="fas fa-caret-down"></i></a>
       <div class="dropdown-menu">
         <a class="dropdown-item">Liste des personnes</a>
         <a class="dropdown-item">Arbres</a>
@@ -19,17 +19,29 @@
     <li class="nav-item disabled dropdown"
         appDropdown>
       <a class="nav-link"
-         role="button">Cuisine<i class="fa fa-caret-down"></i></a>
+         role="button">Cuisine<i class="fas fa-caret-down"></i></a>
       <div class="dropdown-menu">
         <a class="dropdown-item">Bientôt</a>
       </div>
     </li>
     <li class="nav-item disabled dropdown"
         appDropdown>
-      <a class="nav-link disabled">A Faire<i class="fa fa-caret-down"></i></a>
+      <a class="nav-link disabled">A Faire<i class="fas fa-caret-down"></i></a>
       <div class="dropdown-menu">
         <a class="dropdown-item">Bientôt</a>
       </div>
+    </li>
+  </ul>
+  <ul class="nav nav-pills justify-content-end">
+    <li class="nav-item"
+        *ngIf="isAuthenticated()">
+      <a class="nav-link"
+         (click)="onLogout()">Logout<i class="fas fa-sign-out-alt"></i></a>
+    </li>
+    <li class="nav-item"
+        *ngIf="!isAuthenticated()">
+      <a class="nav-link"
+         (click)="onSignin()">Sign In<i class="fas fa-sign-in-alt"></i></a>
     </li>
   </ul>
 </nav>
