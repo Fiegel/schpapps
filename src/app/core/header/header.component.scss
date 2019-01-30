@@ -1,3 +1,8 @@
+a {
+  text-decoration: none;
+  cursor: pointer;
+}
+
 .navbar {
   z-index: 1000;
   position: fixed;
@@ -16,7 +21,6 @@
   font-variant: small-caps;
   font-size: 1.25em;
   margin-bottom: 8px;
-  cursor: pointer;
 }
 
 .fa-stack {
@@ -35,11 +39,6 @@
 
 .aa {
   color: darkred;
-}
-
-.fa-caret-down {
-  padding-left: 10px;
-  font-size: 66%;
 }
 
 .fa-sign-out-alt, .fa-sign-in-alt {
