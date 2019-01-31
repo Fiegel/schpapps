@@ -1,3 +1,4 @@
+import { animate, state, style, transition, trigger } from '@angular/animations';
 import { Component, OnInit } from '@angular/core';
 
 import { AuthService } from '../home/auth/auth.service';
@@ -8,10 +9,15 @@ import { AuthService } from '../home/auth/auth.service';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
+  private navbarOpen = false;
 
   constructor(private authService: AuthService) { }
 
   ngOnInit() {
+  }
+
+  toggleNavbar() {
+    this.navbarOpen = !this.navbarOpen;
   }
 
   isAuthenticated(): boolean {
