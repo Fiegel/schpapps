@@ -1,3 +1,4 @@
+import * as firebaseCredentials from 'firebase-key.json';
 import * as firebase from 'firebase/app';
 
 import { Component, OnInit } from '@angular/core';
@@ -9,10 +10,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AppComponent implements OnInit {
 
+  constructor() { }
+
   ngOnInit() {
-    firebase.initializeApp({
-      apiKey: 'AIzaSyCY99g47nwlrywKT9v7WAAExbiEOmQ9MtM',
-      authDomain: 'schpapps.firebaseapp.com'
-    });
+    firebase.initializeApp(firebaseCredentials.firebase);
   }
 }
