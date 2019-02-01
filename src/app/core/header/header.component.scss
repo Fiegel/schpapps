@@ -12,6 +12,10 @@ a {
   background-image: linear-gradient(90deg,black, var(--gray-dark),var(--gray));
 }
 
+.navbar-collapse.show {
+  background-image: linear-gradient(90deg,black, var(--gray-dark),var(--gray));
+}
+
 .nav-brand {
   font-variant: small-caps;
   margin-right: 20px;

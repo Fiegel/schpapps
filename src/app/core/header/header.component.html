@@ -29,7 +29,8 @@
         <a class="nav-link text-light disabled">A Faire</a>
       </li>
     </ul>
-    <ul class="nav nav-pills justify-content-end">
+    <ul class="nav nav-pills justify-content-end"
+        [ngClass]="{ 'justify-content-end': !navbarOpen}">
       <li class="nav-item"
           *ngIf="isAuthenticated()">
         <a class="nav-link"
