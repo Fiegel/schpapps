@@ -12,6 +12,6 @@
       </div>
     </div>
   </div>
-  <app-puns></app-puns>
-  <app-signin></app-signin>
+  <app-puns *ngIf="isAuthenticated()"></app-puns>
+  <app-signin *ngIf="!isAuthenticated()"></app-signin>
 </div>

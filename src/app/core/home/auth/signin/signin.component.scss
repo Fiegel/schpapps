@@ -1,0 +1,26 @@
+.consult-info {
+  font-size: x-small;
+}
+
+button {
+  line-height: 16px;
+  margin-bottom: 5px;
+}
+
+button:disabled {
+  opacity: 0.3;
+}
+
+.capital {
+  font-weight: bold;
+  color: darkred;
+}
+
+input.ng-invalid.ng-touched {
+  border: 1px solid red;
+}
+
+.help-block {
+  font-style: italic;
+  font-size: small;
+}

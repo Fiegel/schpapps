@@ -1,5 +1,6 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 import { AuthService } from '../home/auth/auth.service';
 
@@ -11,7 +12,8 @@ import { AuthService } from '../home/auth/auth.service';
 export class HeaderComponent implements OnInit {
   private navbarOpen = false;
 
-  constructor(private authService: AuthService) { }
+  constructor(private router: Router,
+    private authService: AuthService) { }
 
   ngOnInit() {
   }
@@ -26,5 +28,6 @@ export class HeaderComponent implements OnInit {
 
   onLogout() {
     this.authService.logout();
+    this.router.navigate(['./']);
   }
 }
