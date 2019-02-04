@@ -18,4 +18,16 @@ export class SigninComponent {
 
     this.authService.signinUser(email, password);
   }
+
+  isEmailInvalid(form: NgForm): boolean {
+    return form.controls.email
+      && form.controls.email.invalid
+      && form.controls.email.touched;
+  }
+
+  isPasswordInvalid(form: NgForm): boolean {
+    return form.controls.password
+      && form.controls.password.invalid
+      && form.controls.password.touched;
+  }
 }

@@ -1,3 +1,19 @@
-<p>
-  puns works!
-</p>
+<div class="row">
+  <div class="col-12 col-sm-10 offset-sm-1 col-md-6 offset-md-3"
+       *ngIf="pun">
+    <blockquote>
+      <p>{{ pun.text }}</p>
+    </blockquote>
+    <cite>- {{ pun.source }}</cite>
+  </div>
+</div>
+<br>
+<div class="row">
+  <div class="col-12 d-flex justify-content-center">
+    <button type="button"
+            class="btn btn-dark"
+            (click)="onRefreshPun()">
+      <i class="fas fa-sync-alt"></i> Une autre !
+    </button>
+  </div>
+</div>

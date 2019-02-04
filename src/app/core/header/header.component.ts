@@ -10,7 +10,7 @@ import { AuthService } from '../home/auth/auth.service';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
-  private navbarOpen = false;
+  navbarOpen = false;
 
   constructor(private router: Router,
     private authService: AuthService) { }

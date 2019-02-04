@@ -12,7 +12,7 @@
                email
                ngModel>
         <span class="help-block text-danger"
-              *ngIf="f.controls['email'].invalid && f.controls['email'].touched">
+              *ngIf="isEmailInvalid(f)">
           Entrez un format d'adresse valide
         </span>
       </div>
@@ -25,7 +25,7 @@
                required
                ngModel>
         <span class="help-block text-danger"
-              *ngIf="f.controls['password'].invalid && f.controls['password'].touched">
+              *ngIf="isPasswordInvalid(f)">
           Entrez un mot de passe
         </span>
       </div>
