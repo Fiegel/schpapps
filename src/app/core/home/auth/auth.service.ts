@@ -28,6 +28,17 @@ export class AuthService {
       .catch(error => console.log(error));
   }
 
+  signinAsGuest() {
+    firebase.auth().signInAnonymously()
+      .then(() => {
+        firebase.auth().currentUser.getIdToken()
+          .then((t: string) => {
+            this.token = t;
+            this.punService.getPunsFromBase();
+          });
+      });
+  }
+
   logout() {
     firebase.auth().signOut();
     this.token = null;

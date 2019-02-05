@@ -18,9 +18,7 @@ export class PunService {
   }
 
   getPunRandom(): Pun {
-    const t = Math.floor(this.puns.length * Math.random());
-    console.log(t);
-    return this.puns[t];
+    return this.puns[Math.floor(this.puns.length * Math.random())];
   }
 
   getPunsFromBase() {

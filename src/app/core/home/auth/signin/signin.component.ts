@@ -19,6 +19,10 @@ export class SigninComponent {
     this.authService.signinUser(email, password);
   }
 
+  onSigninAsGuest() {
+    this.authService.signinAsGuest();
+  }
+
   isEmailInvalid(form: NgForm): boolean {
     return form.controls.email
       && form.controls.email.invalid
