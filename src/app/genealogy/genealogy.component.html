@@ -1,3 +1,15 @@
-<p>
-  genealogy works!
-</p>
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+      <label class="btn btn-dark"
+             for="gedFileInput">
+        <input id="gedFileInput"
+               type="file"
+               accept=".ged, .GED"
+               (change)="onGedFileSelected()"
+               #gedFileInput>
+        Charger un fichier .GED
+      </label>
+    </div>
+  </div>
+</div>

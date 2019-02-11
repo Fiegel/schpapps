@@ -1,3 +1,4 @@
+import * as firebaseCredentials from 'firebase-key.json';
 import { Subject } from 'rxjs';
 import { map } from 'rxjs/operators';
 
@@ -22,7 +23,7 @@ export class PunService {
   }
 
   getPunsFromBase() {
-    this.httpClient.get<Pun[]>('https://schpapps.firebaseio.com/puns.json?orderBy="id"')
+    this.httpClient.get<Pun[]>(firebaseCredentials.firebase.database + 'puns.json?orderBy="id"')
       .pipe(map(puns => {
         for (const pun of puns) {
           if (!pun['source']) {

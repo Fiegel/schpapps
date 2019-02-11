@@ -32,6 +32,10 @@
     <ul class="nav nav-pills justify-content-end"
         [ngClass]="{ 'justify-content-end': !navbarOpen}">
       <li class="nav-item"
+          *ngIf="user">
+        <span class="navbar-text">{{ user.fullname + (user.isAnonymous ? ' (accès limité)' : '') }}</span>
+      </li>
+      <li class="nav-item"
           *ngIf="isAuthenticated()">
         <a class="nav-link"
            (click)="onLogout()">Logout<i class="fas fa-sign-out-alt"></i></a>
