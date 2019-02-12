@@ -1,0 +1,33 @@
+<div class="modal fade"
+     id="errorModalSignin"
+     tabindex="-1"
+     role="dialog"
+     aria-labelledby="errorModalSigninLabel"
+     aria-hidden="true"
+     #errorModalSignin>
+  <div class="modal-dialog"
+       role="document">
+    <div class="modal-content alert alert-danger">
+      <div class="modal-header">
+        <div class="row">
+          <div class="col-2">
+            <i class="fas fa-times fa-2x"></i>
+          </div>
+          <div class="col-10">
+            <h5 class="modal-title"
+                id="errorModalSigninLabel">Erreur de connexion !</h5>
+          </div>
+        </div>
+      </div>
+      <div class="modal-body">
+        <p>L'adresse email ou le mot de passe ne correspond à aucun utilisateur enregistré.</p>
+        <p>Veuillez corriger ou vous connecter en tant qu'Invité.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button"
+                class="btn btn-danger"
+                (click)="onModalClose()"><i class="fas fa-times"></i> Fermer</button>
+      </div>
+    </div>
+  </div>
+</div>

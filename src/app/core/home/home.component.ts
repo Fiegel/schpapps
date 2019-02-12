@@ -27,6 +27,14 @@ export class HomeComponent implements OnInit, OnDestroy {
     return this.authService.isAuthenticated();
   }
 
+  isErrorSignin(): boolean {
+    return this.authService.isErrorSignin();
+  }
+
+  isErrorUnexpected(): boolean {
+    return this.authService.isErrorUnexpected();
+  }
+
   ngOnDestroy() {
     this.userChangedSubscription.unsubscribe();
   }

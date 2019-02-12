@@ -28,3 +28,5 @@
   </div>
   <app-signin *ngIf="!isAuthenticated()"></app-signin>
 </div>
+<app-error-modal-signin [show]="isErrorSignin()"></app-error-modal-signin>
+<app-error-modal-unexpected [show]="isErrorUnexpected()"></app-error-modal-unexpected>

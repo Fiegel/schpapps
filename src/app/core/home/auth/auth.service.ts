@@ -6,7 +6,6 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { PunService } from '../puns/pun.service';
-import { User } from './users/user.model';
 import { UserService } from './users/user.service';
 
 @Injectable({
@@ -14,11 +13,15 @@ import { UserService } from './users/user.service';
 })
 export class AuthService {
   token: string;
+  errorSignin: string;
+  errorUnexpected: string;
 
   authFunction = () => {
     firebase.auth().currentUser.getIdToken()
       .then((t: string) => {
         this.token = t;
+        this.errorSignin = null;
+        this.errorUnexpected = null;
         this.userService.getUserByUid(firebase.auth().currentUser.uid,
           firebase.auth().currentUser.isAnonymous);
         this.punService.getPunsFromBase();
@@ -32,18 +35,20 @@ export class AuthService {
   signinUser(email: string, password: string) {
     firebase.auth().signInWithEmailAndPassword(email, password)
       .then(this.authFunction)
-      .catch(error => console.log(error));
+      .catch(error => error.code.indexOf('user-not-found') ? this.errorSignin = error : this.errorUnexpected = error);
   }
 
   signinAsGuest() {
     firebase.auth().signInAnonymously()
       .then(this.authFunction)
-      .catch(error => console.log(error));
+      .catch(error => this.errorUnexpected = error);
   }
 
   logout() {
     firebase.auth().signOut();
     this.token = null;
+    this.errorSignin = null;
+    this.errorUnexpected = null;
     this.userService.resetUser();
     this.router.navigate(['./']);
   }
@@ -57,5 +62,21 @@ export class AuthService {
 
   isAuthenticated(): boolean {
     return this.token != null;
+  }
+
+  isErrorSignin(): boolean {
+    return this.errorSignin != null;
+  }
+
+  isErrorUnexpected(): boolean {
+    return this.errorUnexpected != null;
+  }
+
+  dismissErrorSignin() {
+    this.errorSignin = null;
+  }
+
+  dismissErrorUnexpected() {
+    this.errorUnexpected = null;
   }
 }
