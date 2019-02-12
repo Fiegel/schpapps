@@ -1,27 +1,41 @@
-# Schpapps
+![Schpapps](./src/assets/logo/Schpapps.png)
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.2.3.
+[FR]
 
-## Development server
+## [Site web](https://schpapps.firebaseapp.com/)
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+Projet personnel pour mes passes-temps personnels : 
 
-## Code scaffolding
+* **Généalogie**
+  * Lecture de fichiers .GED (en cours)
+  * Table des noms avec tris, pagination, filtres (en cours)
+  * Affichage des arbres descendants et ascendants à partir d'une personne (en cours)
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+* **Art culinaire**
+  * Liste des recettes avec ingrédients et livre d'origine (en cours)
+  * Recherche de recettes par ingrédients (en cours)
 
-## Build
+### Application web créée avec **Angular 7+**, Bootstrap 4+ pour le look & feel, pas de jQuery.
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+### Base de données et hébergement fournis par **[Firebase](https://firebase.google.com/)** (Google)
 
-## Running unit tests
+-----
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+[EN]
 
-## Running end-to-end tests
+## [Web site](https://schpapps.firebaseapp.com/)
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+Personnal project for my personnal hobbies:
 
-## Further help
+* **Genealogy**
+  * .GED files upload (in progress)
+  * Table of known people with sort, filters and pagination (in progress)
+  * Ascending and descendant family trees, starting by a selected person (in progress)
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+* **Cookery**
+  * Recipes list with ingredients and source (in progress)
+  * Query by ingredients (in progress)
+
+### Web app built with **Angular 7+**, look & feel from Bootstrap 4+, no jQuery.
+
+### Database and hosting provided by **[Firebase](https://firebase.google.com/)** (Google)
