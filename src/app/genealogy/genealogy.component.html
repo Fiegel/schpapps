@@ -6,8 +6,7 @@
         <input id="gedFileInput"
                type="file"
                accept=".ged, .GED"
-               (change)="onGedFileSelected()"
-               #gedFileInput>
+               (change)="onGedFileSelected($event)">
         Charger un fichier .GED
       </label>
     </div>

@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 import { GenealogyService } from './genealogy.service';
 
@@ -9,18 +9,20 @@ import { GenealogyService } from './genealogy.service';
   styleUrls: ['./genealogy.component.scss']
 })
 export class GenealogyComponent implements OnInit {
-  @ViewChild('gedFileInput')
-  gedFileInput: ElementRef;
 
   constructor(private genealogyService: GenealogyService) { }
 
   ngOnInit() {
   }
 
-  onGedFileSelected() {
-    if (this.gedFileInput.nativeElement.files) {
-      // read file in service
-      console.log(this.gedFileInput.nativeElement.files[0]);
+  onGedFileSelected(event: any) {
+    if (event.target.files && event.target.files.length > 0) {
+      const reader = new FileReader();
+      const file = event.target.files[0];
+      reader.readAsText(file);
+      reader.onload = () => {
+        this.genealogyService.setFileContent(reader.result.toString());
+      };
     }
   }
 }
