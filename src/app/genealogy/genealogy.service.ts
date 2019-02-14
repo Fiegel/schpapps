@@ -1,43 +1,14 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
-export interface Person {
-  id: string;
-  firstname?: string;
-  lastname?: string;
-  gender?: 'M' | 'F';
-  birthDate?: string;
-  birthPlace?: Place;
-  deathDate?: string;
-  deathPlace?: Place;
-  occupation?: string;
-  note?: string;
-  type?: string;
-}
-
-export interface Family {
-  id: string;
-  husband?: Person;
-  wife?: Person;
-  marriageDate?: string;
-  marriagePlace?: Place;
-  children?: Person[];
-}
-
-export interface Place {
-  town?: string;
-  areaCode?: string;
-  county?: string;
-  region?: string;
-  country?: string;
-  subdivision?: string;
-}
+import { Family } from './family.model';
+import { Person } from './person.model';
+import { Place } from './place.model';
 
 @Injectable()
 export class GenealogyService {
   private data: string[][] = [];
   private persons: Person[] = [];
-  private places: Place[] = [];
   private families: Family[] = [];
 
   constructor(private httpClient: HttpClient) { }
@@ -71,40 +42,31 @@ export class GenealogyService {
 
   addPerson(data: string[]) {
     const id = data[0].split(' ')[0];
-    const currentPerson = <Person>{ id };
+    const currentPerson = new Person(id);
 
     for (let i = 1; i < data.length; i++) {
       const tagSepIndex = data[i].indexOf(' ');
-      const tag = data[i].slice(0, tagSepIndex).replace(/[^a-zA-Z0-9]/g, '');
-      const value = data[i].slice(tagSepIndex + 1);
+      const tag = data[i].slice(0, tagSepIndex).replace(/[^a-zA-Z0-9 \-]/g, '');
+      const value = data[i].slice(tagSepIndex + 1).replace(/[^a-zA-Z0-9_@ \-]/g, '');
 
       switch (tag) {
         case 'GIVN': currentPerson.firstname = value;
           break;
         case 'SURN': currentPerson.lastname = value;
           break;
-        case 'SEX': currentPerson.gender = value.indexOf('F') !== -1 ? 'F'
-          : (value.indexOf('M') !== 1 ? 'M' : null); // === does not work
+        case 'SEX': currentPerson.gender = value === 'F' ? 'F' : (value === 'M' ? 'M' : null);
           break;
-        case 'BIRT': currentPerson.birthDate = data[i + 1].substring(5);
-          if (data[i + 2] && data[i + 2].startsWith('PLAC')) {
-            currentPerson.birthPlace = this.getPlace(data[i + 2]);
-          }
+        case 'BIRT': const birth = this.getEventDateAndPlace(data, i);
+          currentPerson.birthDate = birth.date;
+          currentPerson.birthPlace = birth.place;
           break;
-        case 'DEAT': currentPerson.deathDate = data[i + 1].substring(5);
-          if (data[i + 2] && data[i + 2].startsWith('PLAC')) {
-            currentPerson.deathPlace = this.getPlace(data[i + 2]);
-          }
+        case 'DEAT': const death = this.getEventDateAndPlace(data, i);
+          currentPerson.deathDate = death.date;
+          currentPerson.deathPlace = death.place;
           break;
         case 'OCCU': currentPerson.occupation = value;
           break;
-        case 'NOTE': currentPerson.note = value;
-          let nextLine = 1;
-
-          while (data[i + nextLine].startsWith('CONT')) {
-            currentPerson.note += '\n' + data[i + nextLine].substring(5);
-            nextLine++;
-          }
+        case 'NOTE': currentPerson.note = this.getNote(value, data, i);
           break;
         case 'TYPE': currentPerson.type = value;
           break;
@@ -117,20 +79,82 @@ export class GenealogyService {
     this.persons.push(currentPerson);
   }
 
-  private getPlace(data: string) {
+  private getPlace(data: string): Place {
     const placeData = data.substring(5).split(',');
 
-    return <Place>{
-      town: placeData[0],
-      areaCode: placeData[1],
-      county: placeData[2],
-      region: placeData[3],
-      country: placeData[4],
-      subdivision: placeData[5]
-    };
+    return new Place(...placeData);
   }
 
   private addFamily(data: string[]) {
+    const id = data[0].split(' ')[0];
+    const currentFamily = new Family(id);
 
+    for (let i = 1; i < data.length; i++) {
+      const tagSepIndex = data[i].indexOf(' ');
+      const tag = data[i].slice(0, tagSepIndex).replace(/[^a-zA-Z0-9 \-]/g, '');
+      const value = data[i].slice(tagSepIndex + 1).replace(/[^a-zA-Z0-9_@ \-]/g, '');
+
+      switch (tag) {
+        case 'HUSB': currentFamily.husband = this.findPersonById(value);
+          this.checkExistingPerson(currentFamily.husband, id);
+          break;
+        case 'WIFE': currentFamily.wife = this.findPersonById(value);
+          this.checkExistingPerson(currentFamily.wife, id);
+          break;
+        case 'MARR': const marriage = this.getEventDateAndPlace(data, i);
+          currentFamily.marriageDate = marriage.date;
+          currentFamily.marriagePlace = marriage.place;
+          break;
+        case 'CHIL':
+          const newChild = this.findPersonById(value);
+          currentFamily.children ? currentFamily.children.push(newChild) : currentFamily.children = [newChild];
+          this.checkExistingPerson(newChild, id);
+          break;
+        case 'NOTE': currentFamily.note = this.getNote(value, data, i);
+          break;
+        default: if (['PLAC', 'DATE', 'CONT'].indexOf(tag) === -1) {
+          console.log('Unknown tag: ' + tag);
+        }
+      }
+    }
+
+    this.families.push(currentFamily);
+  }
+
+  private findPersonById(id: string): Person {
+    return this.persons.find((person) => person.id === id) || new Person(id);
+  }
+
+  private checkExistingPerson(person: Person, familyId: string) {
+    if (person.id && !person.firstname && !person.lastname) {
+      console.log('Person unknown with id ' + person.id + ' for family id ' + familyId);
+    }
+  }
+
+  private getEventDateAndPlace(data: string[], i: number): { date: string, place: Place } {
+    const event = <{ date: string, place: Place }>{};
+
+    if (data[i + 1] && data[i + 1].startsWith('DATE')) {
+      event.date = data[i + 1].substring(5);
+    }
+
+    if ((!event.date && data[i + 1] && data[i + 1].startsWith('PLAC'))
+      || (data[i + 2] && data[i + 2].startsWith('PLAC'))) {
+      event.place = this.getPlace(data[i + 2]);
+    }
+
+    return event;
+  }
+
+  private getNote(value: string, data: string[], startIndex: number): string {
+    let note = value;
+    let nextLine = 1;
+
+    while (data[startIndex + nextLine] && data[startIndex + nextLine].startsWith('CONT')) {
+      note += '\n' + data[startIndex + nextLine].substring(5);
+      nextLine++;
+    }
+
+    return note;
   }
 }
