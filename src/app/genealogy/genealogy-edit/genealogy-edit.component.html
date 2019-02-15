@@ -1,0 +1,102 @@
+<div class="special-background">
+  <div class="row">
+    <div class="col-4 col-md-3 col-sm-3 d-flex">
+      <button type="button"
+              class="btn btn-primary btn-block"
+              title="Ajouter une personne">
+        <i class="fas fa-user-plus"></i><span class="d-none d-md-inline"> Ajouter une personne</span>
+      </button>
+    </div>
+    <div class="col-4 col-md-3 col-sm-3 d-flex">
+      <button type="button"
+              class="btn btn-primary btn-block"
+              title="Ajouter une famille (union, enfants, etc.)">
+        <i class="fas fa-users"></i><span class="d-none d-md-inline"> Ajouter une famille</span>
+      </button>
+    </div>
+    <div class="col-4 col-md-3 col-sm-3 d-flex">
+      <label class="btn btn-dark btn-block"
+             title="Charger un fichier GEDCOM contenant un arbre généalogique"
+             for="gedFileInput">
+        <input id="gedFileInput"
+               type="file"
+               accept=".ged, .GED"
+               (change)="onGedFileSelected($event)">
+        <i class="fas fa-file-upload"></i><span class="d-none d-md-inline"> Charger un fichier .GED</span>
+      </label>
+    </div>
+  </div>
+
+  <form (ngSubmit)="onPersonSubmit(formPerson)"
+        #formPerson="ngForm">
+    <div class="row">
+      <div class="col-12">
+        <h4>Création d'une nouvelle personne</h4>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-5 form-group">
+        <label for="lastname">Nom</label>
+        <input type="text"
+               id="lastname"
+               class="form-control"
+               name="lastname"
+               ngModel>
+      </div>
+      <div class="col-5 form-group">
+        <label for="firstname">Prénom(s)</label>
+        <input type="text"
+               id="firstname"
+               class="form-control"
+               name="firstname"
+               ngModel>
+      </div>
+      <div class="col-2 form-group">
+        <div class="row">
+          <label for="gender">Sexe</label>
+        </div>
+        <div class="row radio-buttons">
+          <div class="form-check form-check-inline">
+            <input class="form-check-input"
+                   type="radio"
+                   name="gender"
+                   id="male"
+                   value="M">
+            <label class="form-check-label"
+                   for="male">H</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input"
+                   type="radio"
+                   name="gender"
+                   id="female"
+                   value="F">
+            <label class="form-check-label"
+                   for="female">F</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input"
+                   type="radio"
+                   name="gender"
+                   id="unknown"
+                   value="null">
+            <label class="form-check-label"
+                   for="unknown">?</label>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+
+  <form (ngSubmit)="onFamilySubmit(formFamily)"
+        #formFamily="ngForm">
+    <div class="row">
+      <div class="col-12">
+        <h4>Création d'une nouvelle famille</h4>
+      </div>
+    </div>
+    <div class="row">
+
+    </div>
+  </form>
+</div>

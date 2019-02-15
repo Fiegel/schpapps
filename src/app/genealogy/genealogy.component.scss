@@ -2,8 +2,9 @@
   text-align: center;
   font-variant: small-caps;
   font-weight: bold;
-  line-height: 4vh;
-  font-size: 4vh;
+  line-height: calc(12px + 4vh);
+  font-size: calc(12px + 4vh);
+  height: calc(50px + 10vh);
 }
 
 .aa {
@@ -12,8 +13,4 @@
 
 .vl {
   font-weight: normal;
-}
-
-input#gedFileInput {
-  display:none;
 }

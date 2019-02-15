@@ -1,9 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
-import { Family } from './family.model';
-import { Person } from './person.model';
-import { Place } from './place.model';
+import { Family } from './models/family.model';
+import { Person } from './models/person.model';
+import { Place } from './models/place.model';
 
 @Injectable()
 export class GenealogyService {
