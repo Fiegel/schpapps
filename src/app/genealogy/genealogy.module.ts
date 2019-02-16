@@ -1,3 +1,5 @@
+import { ButtonsModule } from 'ngx-bootstrap/buttons';
+
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
@@ -15,6 +17,7 @@ import { GenealogyService } from './genealogy.service';
   imports: [
     FormsModule,
     GenealogyRoutingModule,
+    ButtonsModule.forRoot(),
     SharedModule
   ],
   providers: [

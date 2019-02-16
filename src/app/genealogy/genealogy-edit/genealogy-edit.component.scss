@@ -18,6 +18,10 @@ label>span, button>span {
   margin-left: 10px;
 }
 
+label#genderMale>span, label#genderFemale>span, label#genderUnknown>span {
+  pointer-events: none; 
+}
+
 input#gedFileInput {
   display:none;
 }

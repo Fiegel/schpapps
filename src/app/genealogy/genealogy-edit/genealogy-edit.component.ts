@@ -9,10 +9,19 @@ import { GenealogyService } from '../genealogy.service';
   styleUrls: ['./genealogy-edit.component.scss']
 })
 export class GenealogyEditComponent implements OnInit {
+  isGenderMaleRadioActive = false;
+  isGenderFemaleRadioActive = false;
+  isGenderUnknownRadioActive = false;
 
   constructor(private genealogyService: GenealogyService) { }
 
   ngOnInit() {
+  }
+
+  onGenderRadioClick(event) {
+    this.isGenderMaleRadioActive = event.srcElement.id === 'genderMale';
+    this.isGenderFemaleRadioActive = event.srcElement.id === 'genderFemale';
+    this.isGenderUnknownRadioActive = event.srcElement.id === 'genderUnknown';
   }
 
   onPersonSubmit(form: NgForm) {
