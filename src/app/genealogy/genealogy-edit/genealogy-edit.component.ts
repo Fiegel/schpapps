@@ -5,7 +5,6 @@ import { NgForm } from '@angular/forms';
 
 import { GenealogyService } from '../genealogy.service';
 
-
 @Component({
   selector: 'app-genealogy-edit',
   templateUrl: './genealogy-edit.component.html',
@@ -16,7 +15,7 @@ export class GenealogyEditComponent implements OnInit {
 
   isGenderMaleRadioActive = false;
   isGenderFemaleRadioActive = false;
-  isGenderUnknownRadioActive = false;
+  isGenderUnknownRadioActive = true;
   isBirthCalendarOpen = false;
   isDeathCalendarOpen = false;
 

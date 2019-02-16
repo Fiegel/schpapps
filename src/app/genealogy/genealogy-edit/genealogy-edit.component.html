@@ -35,7 +35,7 @@
       </div>
     </div>
     <div class="row">
-      <div class="col-4 form-group">
+      <div class="col-6 form-group">
         <label for="lastname">Nom</label>
         <input type="text"
                id="lastname"
@@ -43,7 +43,7 @@
                name="lastname"
                ngModel>
       </div>
-      <div class="col-4 form-group">
+      <div class="col-6 form-group">
         <label for="firstname">Prénom(s)</label>
         <input type="text"
                id="firstname"
@@ -51,39 +51,41 @@
                name="firstname"
                ngModel>
       </div>
-      <div class="col-4 form-group">
+    </div>
+    <div class="row">
+      <div class="col-12 form-group">
         <label for="gender">Sexe</label><br>
         <div class="btn-group"
              name="gender"
              btnRadioGroup
              ngModel>
           <label class="btn"
-                 [ngClass]="{ 'btn-primary': !isGenderMaleRadioActive, 'btn-dark': isGenderMaleRadioActive }"
+                 [ngClass]="{ 'btn-primary': !isGenderMaleRadioActive, 'btn-dark active': isGenderMaleRadioActive }"
                  id="genderMale"
                  value="M"
                  btnRadio="M"
                  role="button"
                  (click)="onGenderRadioClick($event)">
-            <span class="d-inline d-lg-none">H</span>
-            <span class="d-none d-lg-inline"><i class="fas fa-mars d-none d-xl-inline"></i> Homme</span></label>
+            <span class="d-inline d-sm-none">H</span>
+            <span class="d-none d-sm-inline"><i class="fas fa-mars d-none d-sm-inline"></i> Homme</span></label>
           <label class="btn"
-                 [ngClass]="{ 'btn-primary': !isGenderFemaleRadioActive, 'btn-dark': isGenderFemaleRadioActive }"
+                 [ngClass]="{ 'btn-primary': !isGenderFemaleRadioActive, 'btn-dark active': isGenderFemaleRadioActive }"
                  id="genderFemale"
                  value="F"
                  btnRadio="F"
                  role="button"
                  (click)="onGenderRadioClick($event)">
-            <span class="d-inline d-lg-none">F</span>
-            <span class="d-none d-lg-inline"><i class="fas fa-venus d-none d-xl-inline"></i> Femme</span></label>
+            <span class="d-inline d-sm-none">F</span>
+            <span class="d-none d-sm-inline"><i class="fas fa-venus d-none d-sm-inline"></i> Femme</span></label>
           <label class="btn"
-                 [ngClass]="{ 'btn-primary': !isGenderUnknownRadioActive, 'btn-dark': isGenderUnknownRadioActive }"
+                 [ngClass]="{ 'btn-primary': !isGenderUnknownRadioActive, 'btn-dark active': isGenderUnknownRadioActive }"
                  id="genderUnknown"
                  value="?"
                  btnRadio="?"
                  role="button"
                  (click)="onGenderRadioClick($event)">
-            <span class="d-inline d-lg-none">?</span>
-            <span class="d-none d-lg-inline"><i class="fas fa-venus-mars d-none d-xl-inline"></i> Inconnu</span></label>
+            <span class="d-inline d-sm-none">?</span>
+            <span class="d-none d-sm-inline"><i class="fas fa-venus-mars d-none d-sm-inline"></i> Inconnu</span></label>
         </div>
       </div>
     </div>
