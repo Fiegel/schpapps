@@ -37,3 +37,10 @@ div.form-footer button {
     margin-right: 10px;
   }
 }
+
+a:not([href]).btn-close-form {
+  text-decoration: none;
+  cursor: pointer;
+  color: darkred;
+  font-size: 1.5rem;
+}

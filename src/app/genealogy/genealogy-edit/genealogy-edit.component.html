@@ -3,14 +3,18 @@
     <div class="col-4 col-md-3 col-sm-3 d-flex">
       <button type="button"
               class="btn btn-primary btn-block"
-              title="Ajouter une personne">
+              title="Ajouter une personne"
+              (click)="onPersonEditClick()"
+              [disabled]="showPersonEdit">
         <i class="fas fa-user-plus"></i><span class="d-none d-md-inline"> Ajouter une personne</span>
       </button>
     </div>
     <div class="col-4 col-md-3 col-sm-3 d-flex">
       <button type="button"
               class="btn btn-primary btn-block"
-              title="Ajouter une famille (union, enfants, etc.)">
+              title="Ajouter une famille (union, enfants, etc.)"
+              (click)="onFamilyEditClick()"
+              [disabled]="showFamilyEdit">
         <i class="fas fa-users"></i><span class="d-none d-md-inline"> Ajouter une famille</span>
       </button>
     </div>
@@ -28,10 +32,15 @@
   </div>
 
   <form (ngSubmit)="onPersonSubmit(formPerson)"
-        #formPerson="ngForm">
+        #formPerson="ngForm"
+        *ngIf="showPersonEdit">
     <div class="row">
-      <div class="col-12">
+      <div class="col-11 d-flex">
         <h4>Création d'une nouvelle personne</h4>
+      </div>
+      <div class="col-1 d-flex justify-content-end">
+        <a class="btn-close-form"
+           (click)="onPersonEditClick()"><i class="fas fa-times"></i></a>
       </div>
     </div>
     <div class="row">
@@ -166,10 +175,15 @@
   </form>
 
   <form (ngSubmit)="onFamilySubmit(formFamily)"
-        #formFamily="ngForm">
+        #formFamily="ngForm"
+        *ngIf="showFamilyEdit">
     <div class="row">
-      <div class="col-12">
+      <div class="col-11 d-flex">
         <h4>Création d'une nouvelle famille</h4>
+      </div>
+      <div class="col-1 d-flex justify-content-end">
+        <a class="btn-close-form"
+           (click)="onFamilyEditClick()"><i class="fas fa-times"></i></a>
       </div>
     </div>
     <div class="row">

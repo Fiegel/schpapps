@@ -11,6 +11,9 @@ import { GenealogyService } from '../genealogy.service';
   styleUrls: ['./genealogy-edit.component.scss']
 })
 export class GenealogyEditComponent implements OnInit {
+  showPersonEdit = false;
+  showFamilyEdit = false;
+
   bsConfig: Partial<BsDatepickerConfig> = Object.assign({}, { containerClass: 'theme-red' });
 
   isGenderMaleRadioActive = false;
@@ -22,6 +25,14 @@ export class GenealogyEditComponent implements OnInit {
   constructor(private genealogyService: GenealogyService) { }
 
   ngOnInit() {
+  }
+
+  onPersonEditClick() {
+    this.showPersonEdit = !this.showPersonEdit;
+  }
+
+  onFamilyEditClick() {
+    this.showFamilyEdit = !this.showFamilyEdit;
   }
 
   onGenderRadioClick(event) {
