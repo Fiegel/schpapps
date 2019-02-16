@@ -1,8 +1,18 @@
 @import 'customize-bootstrap.scss';
-@import "~bootstrap/scss/bootstrap";
-@import "~@fortawesome/fontawesome-free/css/all.css";
+@import '~bootstrap/scss/bootstrap';
+@import '~@fortawesome/fontawesome-free/css/all.css';
+@import '~ngx-bootstrap/datepicker/bs-datepicker.css';
 // @import url('https://fonts.googleapis.com/css?family=Roboto+Condensed');
 
 // body {
 //   font-family: 'Roboto Condensed', sans-serif !important;
 // }
+
+.bs-datepicker-head,
+.bs-datepicker-body table td span.selected {
+  background-color: darkred !important;
+}
+
+.bs-datepicker-body table td.week span {
+  color: darkred !important;
+}

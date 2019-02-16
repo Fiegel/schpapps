@@ -1,7 +1,10 @@
+import { BsDatepickerConfig } from 'ngx-bootstrap/datepicker/ngx-bootstrap-datepicker';
+
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 
 import { GenealogyService } from '../genealogy.service';
+
 
 @Component({
   selector: 'app-genealogy-edit',
@@ -9,9 +12,13 @@ import { GenealogyService } from '../genealogy.service';
   styleUrls: ['./genealogy-edit.component.scss']
 })
 export class GenealogyEditComponent implements OnInit {
+  bsConfig: Partial<BsDatepickerConfig> = Object.assign({}, { containerClass: 'theme-red' });
+
   isGenderMaleRadioActive = false;
   isGenderFemaleRadioActive = false;
   isGenderUnknownRadioActive = false;
+  isBirthCalendarOpen = false;
+  isDeathCalendarOpen = false;
 
   constructor(private genealogyService: GenealogyService) { }
 

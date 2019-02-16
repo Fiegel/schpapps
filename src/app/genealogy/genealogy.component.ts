@@ -1,4 +1,10 @@
+import { defineLocale } from 'ngx-bootstrap/chronos';
+import { BsLocaleService } from 'ngx-bootstrap/datepicker';
+import { frLocale } from 'ngx-bootstrap/locale';
+
 import { Component, OnInit } from '@angular/core';
+
+defineLocale('fr', frLocale);
 
 @Component({
   selector: 'app-genealogy',
@@ -7,9 +13,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class GenealogyComponent implements OnInit {
 
-  constructor() { }
+  constructor(private localeService: BsLocaleService) { }
 
   ngOnInit() {
+    this.localeService.use('fr');
   }
 
 }
