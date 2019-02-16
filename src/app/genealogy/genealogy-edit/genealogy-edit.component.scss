@@ -14,7 +14,7 @@ label {
   margin-bottom: 0;
 }
 
-label>span, button>span {
+div.d-flex>label>span, div.d-flex>button>span {
   margin-left: 10px;
 }
 
@@ -28,4 +28,12 @@ input#gedFileInput {
 
 div.radio-buttons {
   height: calc(2.25rem + 2px);
+}
+
+div.form-footer button {
+  width: calc(100px + 1vw);
+
+  i {
+    margin-right: 10px;
+  }
 }
