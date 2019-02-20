@@ -12,21 +12,21 @@ import { PunService } from './pun.service';
 })
 export class PunsComponent implements OnInit, OnDestroy {
   pun: Pun;
-  punsChangedSubscription: Subscription;
+  punChangedSubscription: Subscription;
 
   constructor(private punService: PunService) { }
 
   ngOnInit() {
-    this.punsChangedSubscription = this.punService.punsChanged
-      .subscribe(() => this.pun = this.punService.getPunRandom());
-    this.pun = this.punService.getPunRandom();
+    this.punChangedSubscription = this.punService.punChanged
+      .subscribe(() => this.pun = this.punService.getPun());
+    this.pun = this.punService.getPun();
   }
 
   onRefreshPun() {
-    this.pun = this.punService.getPunRandom();
+    this.punService.getRandomPunFromBase();
   }
 
   ngOnDestroy() {
-    this.punsChangedSubscription.unsubscribe();
+    this.punChangedSubscription.unsubscribe();
   }
 }

@@ -1,41 +1,33 @@
-import * as firebaseCredentials from 'firebase-key.json';
 import { Subject } from 'rxjs';
 import { map } from 'rxjs/operators';
 
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
+import { FirestoreService } from '../../../shared/firestore.service';
 import { Pun } from './pun.model';
 
 @Injectable()
 export class PunService {
-  private puns: Pun[] = [];
-  punsChanged = new Subject<void>();
+  private currentPun: Pun;
+  punChanged = new Subject<void>();
 
-  constructor(private httpClient: HttpClient) { }
+  constructor(private firestoreService: FirestoreService) { }
 
-  getPuns(): Pun[] {
-    return this.puns.slice();
-  }
-
-  getPunRandom(): Pun {
-    return this.puns[Math.floor(this.puns.length * Math.random())];
-  }
-
-  getPunsFromBase() {
-    this.httpClient.get<Pun[]>(firebaseCredentials.firebase.database + 'puns.json?orderBy="id"')
-      .pipe(map(puns => {
-        for (const pun of puns) {
-          if (!pun['source']) {
-            pun['source'] = 'Source inconnue';
-          }
+  getRandomPunFromBase() {
+    this.firestoreService.getDocumentRandom('puns', 'id', { onlyData: true, debug: true })
+      .pipe(map(pun => {
+        if (!pun['source']) {
+          pun['source'] = 'Source inconnue';
         }
-
-        return puns;
+        return pun;
       }))
-      .subscribe(puns => {
-        this.puns = puns;
-        this.punsChanged.next();
+      .subscribe(pun => {
+        this.currentPun = pun;
+        this.punChanged.next();
       });
+  }
+
+  getPun(): Pun {
+    return this.currentPun;
   }
 }

@@ -24,7 +24,7 @@ export class AuthService {
         this.errorUnexpected = null;
         this.userService.getUserByUid(firebase.auth().currentUser.uid,
           firebase.auth().currentUser.isAnonymous);
-        this.punService.getPunsFromBase();
+        this.punService.getRandomPunFromBase();
       });
   }
 

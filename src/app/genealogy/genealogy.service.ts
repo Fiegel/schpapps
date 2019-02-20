@@ -1,4 +1,3 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 import { Family } from './models/family.model';
@@ -11,7 +10,7 @@ export class GenealogyService {
   private persons: Person[] = [];
   private families: Family[] = [];
 
-  constructor(private httpClient: HttpClient) { }
+  constructor() { }
 
   setFileContent(fileContent: string) {
     const fileBlocks = fileContent.split('\n0 ');
