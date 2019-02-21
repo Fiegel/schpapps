@@ -7,6 +7,11 @@ import { flatMap } from 'rxjs/operators';
 
 import { Injectable } from '@angular/core';
 
+interface QueryOptions {
+  raw?: boolean;
+  debug?: boolean;
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -55,7 +60,7 @@ export class FirestoreService {
       .catch(error => console.error('Error adding documents (batch): ', error));
   }
 
-  getCollection(collection: string, options?: { onlyData?: boolean, debug?: boolean }): Observable<any> {
+  getCollection(collection: string, options?: QueryOptions): Observable<any> {
     return from(this.database.collection(collection).get()
       .then(results => {
         if (options && options.debug) {
@@ -65,17 +70,17 @@ export class FirestoreService {
           });
         }
 
-        if (options && options.onlyData) {
+        if (options && options.raw) {
+          return results;
+        } else {
           const resultData = [];
           results.forEach(doc => resultData.push(doc.data()));
           return resultData;
-        } else {
-          return results;
         }
       }));
   }
 
-  getDocument(collection: string, doc: string, options?: { onlyData?: boolean, debug?: boolean }): Observable<any> {
+  getDocument(collection: string, doc: string, options?: QueryOptions): Observable<any> {
     return from(this.database.collection(collection).doc(doc).get()
       .then(result => {
         if (options && options.debug) {
@@ -83,11 +88,11 @@ export class FirestoreService {
           console.log(result.data());
         }
 
-        return options && options.onlyData ? result.data() : result;
+        return options && options.raw ? result : result.data();
       }));
   }
 
-  getDocumentMax(collection: string, field: string, options?: { onlyData?: boolean, debug?: boolean }): Observable<any> {
+  getDocumentMax(collection: string, field: string, options?: QueryOptions): Observable<any> {
     return from(this.database.collection(collection).orderBy(field, 'desc').limit(1).get()
       .then(results => {
         if (options && options.debug) {
@@ -96,11 +101,11 @@ export class FirestoreService {
           console.log(results.docs[0].data());
         }
 
-        return options && options.onlyData ? results.docs[0].data() : results.docs[0];
+        return options && options.raw ? results.docs[0] : results.docs[0].data();
       }));
   }
 
-  getDocumentRandom(collection: string, field: string, options?: { onlyData?: boolean, debug?: boolean }): Observable<any> {
+  getDocumentRandom(collection: string, field: string, options?: QueryOptions): Observable<any> {
     return this.getDocumentMax(collection, field, options).pipe(flatMap(result => {
       const r = Math.floor(result[field] * Math.random());
       return this.database.collection(collection).orderBy(field).where(field, '>=', r).limit(1).get()
@@ -110,7 +115,7 @@ export class FirestoreService {
             console.log(results.docs[0].data());
           }
 
-          return options && options.onlyData ? results.docs[0].data() : results.docs[0];
+          return options && options.raw ? results.docs[0] : results.docs[0].data();
         });
     }));
   }
