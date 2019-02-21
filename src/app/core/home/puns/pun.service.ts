@@ -14,7 +14,7 @@ export class PunService {
   constructor(private firestoreService: FirestoreService) { }
 
   getRandomPunFromBase() {
-    this.firestoreService.getDocumentRandom('puns', 'id', { onlyData: true, debug: true })
+    this.firestoreService.getDocumentRandom('puns', 'id', { onlyData: true })
       .pipe(map(pun => {
         if (!pun['source']) {
           pun['source'] = 'Source inconnue';

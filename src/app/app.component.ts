@@ -14,6 +14,12 @@ export class AppComponent implements OnInit {
   ngOnInit() {
     this.firestoreService.firestoreInit();
 
+    // this.firestoreService.mergeDoc('users', '2TWbTNyNvsfCYkNjtsJXxhzzDyW2', {
+    //   email: 'jeremy.fiegel@hotmail.fr',
+    //   fullname: 'Jérémy FIEGEL',
+    //   surname: 'Jérémy'
+    // });
+
     // this.firestoreService.addAllDoc('puns', [{
     //   id: 0,
     //   text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, '

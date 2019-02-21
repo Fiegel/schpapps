@@ -1,9 +1,8 @@
-import * as firebaseCredentials from 'firebase-key.json';
 import { Subject } from 'rxjs';
 
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
+import { FirestoreService } from '../../../../shared/firestore.service';
 import { User } from './user.model';
 
 const guest: User = {
@@ -18,19 +17,19 @@ export class UserService {
   private user: User;
   userChanged = new Subject<User>();
 
-  constructor(private httpClient: HttpClient) { }
+  constructor(private firestoreService: FirestoreService) { }
 
   getUserByUid(uid: string, isAnonymous: boolean) {
     if (isAnonymous) {
       this.user = guest;
       this.userChanged.next(this.user);
+    } else {
+      this.firestoreService.getDocument('users', uid, { onlyData: true, debug: true })
+        .subscribe(user => {
+          this.user = { ...user, isAnonymous: false };
+          this.userChanged.next(this.user);
+        });
     }
-
-    this.httpClient.get<User[]>(firebaseCredentials.firebase.database + 'users.json?orderBy="$key"&endAt="' + uid + '"')
-      .subscribe(users => {
-        this.user = users[uid] ? { ...users[uid], isAnonymous: false } : guest;
-        this.userChanged.next(this.user);
-      });
   }
 
   getCurrentUser(): User {
