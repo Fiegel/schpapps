@@ -12,8 +12,12 @@
   <div class="col-12 d-flex justify-content-center">
     <button type="button"
             class="btn btn-dark"
-            (click)="onRefreshPun()">
-      <i class="fas fa-sync-alt"></i> Une autre !
+            (click)="onRefreshPun()"
+            [disabled]=loading>
+      <i class="fas fa-sync-alt"
+         [ngClass]="{'fa-spin': loading}"></i>
+      <span *ngIf="!loading"> Une autre !</span>
+      <span *ngIf="loading"> Chargement...</span>
     </button>
   </div>
 </div>

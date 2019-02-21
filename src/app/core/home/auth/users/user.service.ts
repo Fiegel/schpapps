@@ -24,7 +24,7 @@ export class UserService {
       this.user = guest;
       this.userChanged.next(this.user);
     } else {
-      this.firestoreService.getDocument('users', uid, { onlyData: true, debug: true })
+      this.firestoreService.getDocument('users', uid, { onlyData: true })
         .subscribe(user => {
           this.user = { ...user, isAnonymous: false };
           this.userChanged.next(this.user);

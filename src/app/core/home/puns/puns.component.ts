@@ -13,16 +13,21 @@ import { PunService } from './pun.service';
 export class PunsComponent implements OnInit, OnDestroy {
   pun: Pun;
   punChangedSubscription: Subscription;
+  loading: boolean;
 
   constructor(private punService: PunService) { }
 
   ngOnInit() {
     this.punChangedSubscription = this.punService.punChanged
-      .subscribe(() => this.pun = this.punService.getPun());
+      .subscribe(() => {
+        this.pun = this.punService.getPun();
+        this.loading = false;
+      });
     this.pun = this.punService.getPun();
   }
 
   onRefreshPun() {
+    this.loading = true;
     this.punService.getRandomPunFromBase();
   }
 
