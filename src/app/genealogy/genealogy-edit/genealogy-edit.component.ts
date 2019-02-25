@@ -2,6 +2,9 @@ import { BsDatepickerConfig } from 'ngx-bootstrap/datepicker/ngx-bootstrap-datep
 
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import {
+  formArrayNameProvider
+} from '@angular/forms/src/directives/reactive_directives/form_group_name';
 
 import { GenealogyService } from '../genealogy.service';
 
@@ -47,6 +50,10 @@ export class GenealogyEditComponent implements OnInit {
 
   onFamilySubmit(form: NgForm) {
     console.log(form.value);
+  }
+
+  onClear(form: NgForm) {
+    form.reset();
   }
 
   onGedFileSelected(event: any) {

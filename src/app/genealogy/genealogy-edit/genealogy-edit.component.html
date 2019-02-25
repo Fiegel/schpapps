@@ -35,10 +35,10 @@
         #formPerson="ngForm"
         *ngIf="showPersonEdit">
     <div class="row">
-      <div class="col-11 d-flex">
+      <div class="col-12 col-sm-11">
         <h4>Création d'une nouvelle personne</h4>
       </div>
-      <div class="col-1 d-flex justify-content-end">
+      <div class="col-1 d-none d-sm-inline text-right">
         <a class="btn-close-form"
            (click)="onPersonEditClick()"><i class="fas fa-times"></i></a>
       </div>
@@ -165,11 +165,23 @@
     <div class="row form-footer">
       <div class="col d-flex">
         <button type="submit"
-                class="btn btn-primary"><i class="fas fa-check"></i> Créer</button>
+                class="btn btn-primary">
+          <i class="fas fa-check"></i><span class="d-none d-sm-inline"> Créer</span>
+        </button>
+      </div>
+      <div class="col d-flex justify-content-center">
+        <button type="reset"
+                class="btn btn-secondary"
+                (click)="onClear(formPerson)">
+          <i class="fas fa-trash"></i><span class="d-none d-sm-inline"> Effacer</span>
+        </button>
       </div>
       <div class="col d-flex justify-content-end">
         <button type="button"
-                class="btn btn-secondary"><i class="fas fa-times"></i> Effacer</button>
+                class="btn btn-secondary"
+                (click)="onPersonEditClick()">
+          <i class="fas fa-times"></i><span class="d-none d-sm-inline"> Fermer</span>
+        </button>
       </div>
     </div>
   </form>
@@ -178,16 +190,38 @@
         #formFamily="ngForm"
         *ngIf="showFamilyEdit">
     <div class="row">
-      <div class="col-11 d-flex">
+      <div class="col-12 col-sm-11">
         <h4>Création d'une nouvelle famille</h4>
       </div>
-      <div class="col-1 d-flex justify-content-end">
+      <div class="col-1 d-none d-sm-inline text-right">
         <a class="btn-close-form"
            (click)="onFamilyEditClick()"><i class="fas fa-times"></i></a>
       </div>
     </div>
     <div class="row">
 
+    </div>
+    <div class="row form-footer">
+      <div class="col d-flex">
+        <button type="submit"
+                class="btn btn-primary">
+          <i class="fas fa-check"></i><span class="d-none d-sm-inline"> Créer</span>
+        </button>
+      </div>
+      <div class="col d-flex justify-content-center">
+        <button type="reset"
+                class="btn btn-secondary"
+                (click)="onClear(formFamily)">
+          <i class="fas fa-trash"></i><span class="d-none d-sm-inline"> Effacer</span>
+        </button>
+      </div>
+      <div class="col d-flex justify-content-end">
+        <button type="button"
+                class="btn btn-secondary"
+                (click)="onFamilyEditClick()">
+          <i class="fas fa-times"></i><span class="d-none d-sm-inline"> Fermer</span>
+        </button>
+      </div>
     </div>
   </form>
 </div>

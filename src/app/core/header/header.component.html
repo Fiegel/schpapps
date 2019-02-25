@@ -15,7 +15,8 @@
   </button>
 
   <div class="collapse navbar-collapse"
-       [ngClass]="{ 'show': navbarOpen }">
+       [ngClass]="{ 'show': navbarOpen }"
+       (click)="toggleNavbar()">
     <ul class="nav nav-pills mr-auto">
       <li class="nav-item">
         <a class="nav-link text-light"
