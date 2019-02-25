@@ -42,3 +42,8 @@ a:not([href]).btn-close-form {
   color: darkred;
   font-size: 1.5rem;
 }
+
+select {
+  border-bottom-right-radius: 0;
+  border-top-right-radius: 0;
+}

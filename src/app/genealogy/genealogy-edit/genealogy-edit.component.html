@@ -102,16 +102,30 @@
       <div class="col-12 col-sm-6 form-group">
         <label for="birthDate">Date de naissance</label>
         <div class="input-group">
+          <div class="input-group-prepend">
+            <select class="custom-select"
+                    name="birthDateControl"
+                    id="birthDateControl"
+                    (change)="onBirthDateControlChange(formPerson, $event.target.value)"
+                    ngModel>
+              <option value="day">(date exacte)</option>
+              <option value="month">~ (mois)</option>
+              <option value="year">~ (année)</option>
+            </select>
+          </div>
           <input type="text"
                  id="birthDate"
                  class="form-control"
                  name="birthDate"
+                 autocomplete="off"
                  bsDatepicker
-                 [bsConfig]="bsConfig"
+                 [bsConfig]="birthBsConfig"
                  [isOpen]="isBirthCalendarOpen"
+                 (bsValueChange)="isBirthCalendarOpen = false"
                  ngModel>
           <div class="input-group-append">
-            <button class="btn btn-primary"
+            <button type="button"
+                    class="btn btn-primary"
                     (click)="isBirthCalendarOpen = !isBirthCalendarOpen"><i class="far fa-calendar-alt"></i></button>
           </div>
         </div>
@@ -129,16 +143,30 @@
       <div class="col-12 col-sm-6 form-group">
         <label for="deathDate">Date de décès</label>
         <div class="input-group">
+          <div class="input-group-prepend">
+            <select class="custom-select"
+                    name="deathDateControl"
+                    id="deathDateControl"
+                    (change)="onDeathDateControlChange(formPerson, $event.target.value)"
+                    ngModel>
+              <option value="day">(date exacte)</option>
+              <option value="month">~ (mois)</option>
+              <option value="year">~ (année)</option>
+            </select>
+          </div>
           <input type="text"
                  id="deathDate"
                  class="form-control"
                  name="deathDate"
+                 autocomplete="off"
                  bsDatepicker
-                 [bsConfig]="bsConfig"
+                 [bsConfig]="deathBsConfig"
                  [isOpen]="isDeathCalendarOpen"
+                 (bsValueChange)="isDeathCalendarOpen = false"
                  ngModel>
           <div class="input-group-append">
-            <button class="btn btn-primary"
+            <button type="button"
+                    class="btn btn-primary"
                     (click)="isDeathCalendarOpen = !isDeathCalendarOpen"><i class="far fa-calendar-alt"></i></button>
           </div>
         </div>

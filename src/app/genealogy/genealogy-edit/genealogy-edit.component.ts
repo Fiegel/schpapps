@@ -1,10 +1,10 @@
-import { BsDatepickerConfig } from 'ngx-bootstrap/datepicker/ngx-bootstrap-datepicker';
-
-import { Component, OnInit } from '@angular/core';
-import { NgForm } from '@angular/forms';
 import {
-  formArrayNameProvider
-} from '@angular/forms/src/directives/reactive_directives/form_group_name';
+  BsDatepickerConfig, BsDatepickerViewMode
+} from 'ngx-bootstrap/datepicker/ngx-bootstrap-datepicker';
+
+import { convertMetaToOutput } from '@angular/compiler/src/render3/util';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { NgForm } from '@angular/forms';
 
 import { GenealogyService } from '../genealogy.service';
 
@@ -17,7 +17,16 @@ export class GenealogyEditComponent implements OnInit {
   showPersonEdit = false;
   showFamilyEdit = false;
 
-  bsConfig: Partial<BsDatepickerConfig> = Object.assign({}, { containerClass: 'theme-red' });
+  birthBsConfig: Partial<BsDatepickerConfig> = Object.assign({}, {
+    containerClass: 'theme-red',
+    minMode: <BsDatepickerViewMode>'day',
+    dateInputFormat: 'DD/MM/YYYY'
+  });
+  deathBsConfig: Partial<BsDatepickerConfig> = Object.assign({}, {
+    containerClass: 'theme-red',
+    minMode: <BsDatepickerViewMode>'day',
+    dateInputFormat: 'DD/MM/YYYY'
+  });
 
   isGenderMaleRadioActive = false;
   isGenderFemaleRadioActive = false;
@@ -54,6 +63,28 @@ export class GenealogyEditComponent implements OnInit {
 
   onClear(form: NgForm) {
     form.reset();
+  }
+
+  onBirthDateControlChange(form: NgForm, value: BsDatepickerViewMode) {
+    this.birthBsConfig.minMode = value;
+    this.birthBsConfig.dateInputFormat = this.getDateFormatFromMinMode(value);
+    this.isBirthCalendarOpen = false;
+    form.setValue({ ...form.value, 'birthDate': null });
+  }
+
+  onDeathDateControlChange(form: NgForm, value: BsDatepickerViewMode) {
+    this.deathBsConfig.minMode = value;
+    this.deathBsConfig.dateInputFormat = this.getDateFormatFromMinMode(value);
+    this.isDeathCalendarOpen = false;
+    form.setValue({ ...form.value, 'deathDate': null });
+  }
+
+  getDateFormatFromMinMode(minMode: BsDatepickerViewMode) {
+    switch (minMode) {
+      case 'day': return 'DD/MM/YYYY';
+      case 'month': return 'MM/YYYY';
+      case 'year': return 'YYYY';
+    }
   }
 
   onGedFileSelected(event: any) {
