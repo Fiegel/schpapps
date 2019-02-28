@@ -72,6 +72,17 @@ export class GenealogyEditComponent implements OnInit, OnDestroy {
   }
 
   onPersonSubmit(form: NgForm) {
+    // TODO get other persons with same first/lastname in the db
+    // and check with the user if they are not the same
+    this.genealogyService.addPerson(<Person>{
+      id: this.genealogyService.getIncPersonsIdCounter(),
+      firstname: form.value.firstname,
+      lastname: form.value.lastname,
+      gender: this.getGenderFromForm(form.value.gender),
+      occupation: form.value.occupation,
+      note: form.value.note
+    });
+
     console.log(form.value);
   }
 
@@ -96,7 +107,6 @@ export class GenealogyEditComponent implements OnInit, OnDestroy {
     this.isDeathCalendarOpen = false;
     form.setValue({ ...form.value, 'deathDate': null });
   }
-
   getDateFormatFromMinMode(minMode: BsDatepickerViewMode): string {
     let format: string;
 
@@ -118,6 +128,14 @@ export class GenealogyEditComponent implements OnInit, OnDestroy {
       reader.onload = () => {
         this.gedcomReaderService.readFileContent(reader.result.toString());
       };
+    }
+  }
+
+  getGenderFromForm(genderForm: string): string {
+    if (genderForm === 'M' || genderForm === 'F') {
+      return genderForm;
+    } else {
+      return null;
     }
   }
 

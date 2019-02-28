@@ -10,9 +10,6 @@ export class GedcomReaderService {
   private data: string[][] = [];
   private persons: Person[] = [];
   private families: Family[] = [];
-  private personsIdCounter = 1;
-  private familiesIdCounter = 1;
-  private placesIdCounter = 1; // TODO replace by get id from database
 
   constructor(private genealogyService: GenealogyService) { }
 
@@ -55,7 +52,7 @@ export class GedcomReaderService {
   }
 
   addPerson(data: string[]) {
-    const currentPerson = new Person(this.personsIdCounter++);
+    const currentPerson = new Person(this.genealogyService.getIncPersonsIdCounter());
     currentPerson.gedcomId = data[0].split(' ')[0];
 
     for (let i = 1; i < data.length; i++) {
@@ -96,11 +93,11 @@ export class GedcomReaderService {
   private getPlace(data: string): Place {
     const placeData = data.substring(5).split(',');
 
-    return new Place(this.placesIdCounter++, ...placeData);
+    return new Place(this.genealogyService.getIncPlacesIdCounter(), ...placeData);
   }
 
   private addFamily(data: string[]) {
-    const currentFamily = new Family(this.familiesIdCounter++);
+    const currentFamily = new Family(this.genealogyService.getIncFamiliesIdCounter());
     currentFamily.gedcomId = data[0].split(' ')[0];
 
     for (let i = 1; i < data.length; i++) {
@@ -136,7 +133,8 @@ export class GedcomReaderService {
   }
 
   private findPersonByGedcomId(gedcomId: string): Person {
-    return this.persons.find((person) => person.gedcomId === gedcomId) || <Person>{ id: this.personsIdCounter++, gedcomId };
+    return this.persons.find((person) => person.gedcomId === gedcomId)
+      || <Person>{ id: this.genealogyService.getIncPersonsIdCounter(), gedcomId };
   }
 
   private checkExistingPerson(person: Person, familyGedcomId: string) {

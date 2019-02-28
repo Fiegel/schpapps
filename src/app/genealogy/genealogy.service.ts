@@ -9,6 +9,9 @@ import { Person } from './models/person.model';
 export class GenealogyService {
   private persons: Person[] = [];
   private families: Family[] = [];
+  private personsIdCounter = 1;
+  private familiesIdCounter = 1;
+  private placesIdCounter = 1; // TODO replace by get id from database
 
   personsChanged = new Subject<Person[]>();
   familiesChanged = new Subject<Family[]>();
@@ -19,6 +22,18 @@ export class GenealogyService {
 
   getFamily(): Family[] {
     return this.families;
+  }
+
+  getIncPersonsIdCounter(): number {
+    return this.personsIdCounter++;
+  }
+
+  getIncFamiliesIdCounter(): number {
+    return this.familiesIdCounter++;
+  }
+
+  getIncPlacesIdCounter(): number {
+    return this.placesIdCounter++;
   }
 
   addPerson(person: Person) {
