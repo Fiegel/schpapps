@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 
+import { GenealogyService } from './genealogy.service';
 import { Family } from './models/family.model';
 import { Person } from './models/person.model';
 import { Place } from './models/place.model';
@@ -10,9 +11,9 @@ export class GedcomReaderService {
   private persons: Person[] = [];
   private families: Family[] = [];
 
-  constructor() { }
+  constructor(private genealogyService: GenealogyService) { }
 
-  setFileContent(fileContent: string) {
+  readFileContent(fileContent: string) {
     const fileBlocks = fileContent.split('\n0 ');
 
     for (let i = 0; i < fileBlocks.length; i++) {
@@ -37,6 +38,17 @@ export class GedcomReaderService {
         }
       }
     }
+
+    this.genealogyService.addPersons(this.persons);
+    this.genealogyService.addFamilies(this.families);
+
+    this.clearData();
+  }
+
+  private clearData() {
+    this.data = [];
+    this.persons = [];
+    this.families = [];
   }
 
   addPerson(data: string[]) {

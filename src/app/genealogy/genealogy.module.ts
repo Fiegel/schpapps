@@ -9,6 +9,7 @@ import { GedcomReaderService } from './gedcom-reader.service';
 import { GenealogyEditComponent } from './genealogy-edit/genealogy-edit.component';
 import { GenealogyRoutingModule } from './genealogy-routing.module';
 import { GenealogyComponent } from './genealogy.component';
+import { GenealogyService } from './genealogy.service';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { GenealogyComponent } from './genealogy.component';
     SharedModule
   ],
   providers: [
+    GenealogyService,
     GedcomReaderService
   ]
 })

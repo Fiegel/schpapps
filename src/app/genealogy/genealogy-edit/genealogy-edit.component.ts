@@ -1,37 +1,41 @@
 import {
   BsDatepickerConfig, BsDatepickerViewMode
 } from 'ngx-bootstrap/datepicker/ngx-bootstrap-datepicker';
+import { Subscription } from 'rxjs';
 
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 
 import { GedcomReaderService } from '../gedcom-reader.service';
+import { GenealogyService } from '../genealogy.service';
+import { Family } from '../models/family.model';
+import { Person } from '../models/person.model';
 
 @Component({
   selector: 'app-genealogy-edit',
   templateUrl: './genealogy-edit.component.html',
   styleUrls: ['./genealogy-edit.component.scss']
 })
-export class GenealogyEditComponent implements OnInit {
+export class GenealogyEditComponent implements OnInit, OnDestroy {
   minModes = [
     { value: 'day', text: '(date exacte)', format: 'DD/MM/YYYY' },
     { value: 'month', text: '~ (mois)', format: 'MM/YYYY' },
     { value: 'year', text: '~ (année)', format: 'YYYY' }
   ];
-  defaultMinMode = this.minModes[0].value;
+  defaultMinMode = this.minModes[0];
 
   showPersonEdit = false;
   showFamilyEdit = false;
 
   birthBsConfig: Partial<BsDatepickerConfig> = Object.assign({}, {
     containerClass: 'theme-red',
-    minMode: <BsDatepickerViewMode>this.defaultMinMode,
-    dateInputFormat: 'DD/MM/YYYY'
+    minMode: <BsDatepickerViewMode>this.defaultMinMode.value,
+    dateInputFormat: this.defaultMinMode.format
   });
   deathBsConfig: Partial<BsDatepickerConfig> = Object.assign({}, {
     containerClass: 'theme-red',
-    minMode: <BsDatepickerViewMode>this.defaultMinMode,
-    dateInputFormat: 'DD/MM/YYYY'
+    minMode: <BsDatepickerViewMode>this.defaultMinMode.value,
+    dateInputFormat: this.defaultMinMode.format
   });
 
   isGenderMaleRadioActive = false;
@@ -40,9 +44,17 @@ export class GenealogyEditComponent implements OnInit {
   isBirthCalendarOpen = false;
   isDeathCalendarOpen = false;
 
-  constructor(private gedcomReaderService: GedcomReaderService) { }
+  personsChangedSubscription: Subscription;
+  familiesChangedSubscription: Subscription;
+
+  constructor(private gedcomReaderService: GedcomReaderService,
+    private genealogyService: GenealogyService) { }
 
   ngOnInit() {
+    this.personsChangedSubscription = this.genealogyService.personsChanged
+      .subscribe((persons: Person[]) => console.log(persons));
+    this.familiesChangedSubscription = this.genealogyService.familiesChanged
+      .subscribe((families: Family[]) => console.log(families));
   }
 
   onPersonEditClick() {
@@ -104,8 +116,13 @@ export class GenealogyEditComponent implements OnInit {
       const file = event.target.files[0];
       reader.readAsText(file);
       reader.onload = () => {
-        this.gedcomReaderService.setFileContent(reader.result.toString());
+        this.gedcomReaderService.readFileContent(reader.result.toString());
       };
     }
+  }
+
+  ngOnDestroy() {
+    this.personsChangedSubscription.unsubscribe();
+    this.familiesChangedSubscription.unsubscribe();
   }
 }

@@ -107,7 +107,7 @@
                     name="birthDateControl"
                     id="birthDateControl"
                     (change)="onBirthDateControlChange(formPerson, $event.target.value)"
-                    [ngModel]="defaultMinMode">
+                    [ngModel]="defaultMinMode.value">
               <option *ngFor="let minMode of minModes"
                       [value]="minMode.value">{{ minMode.text }}</option>
             </select>
@@ -147,7 +147,7 @@
                     name="deathDateControl"
                     id="deathDateControl"
                     (change)="onDeathDateControlChange(formPerson, $event.target.value)"
-                    [ngModel]="defaultMinMode">
+                    [ngModel]="defaultMinMode.value">
               <option *ngFor="let minMode of minModes"
                       [value]="minMode.value">{{ minMode.text }}</option>
             </select>
