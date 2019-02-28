@@ -3,7 +3,7 @@ import {
 } from 'ngx-bootstrap/datepicker/ngx-bootstrap-datepicker';
 import { Subscription } from 'rxjs';
 
-import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 
 import { GedcomReaderService } from '../gedcom-reader.service';
