@@ -107,10 +107,9 @@
                     name="birthDateControl"
                     id="birthDateControl"
                     (change)="onBirthDateControlChange(formPerson, $event.target.value)"
-                    ngModel>
-              <option value="day">(date exacte)</option>
-              <option value="month">~ (mois)</option>
-              <option value="year">~ (année)</option>
+                    [ngModel]="defaultMinMode">
+              <option *ngFor="let minMode of minModes"
+                      [value]="minMode.value">{{ minMode.text }}</option>
             </select>
           </div>
           <input type="text"
@@ -148,10 +147,9 @@
                     name="deathDateControl"
                     id="deathDateControl"
                     (change)="onDeathDateControlChange(formPerson, $event.target.value)"
-                    ngModel>
-              <option value="day">(date exacte)</option>
-              <option value="month">~ (mois)</option>
-              <option value="year">~ (année)</option>
+                    [ngModel]="defaultMinMode">
+              <option *ngFor="let minMode of minModes"
+                      [value]="minMode.value">{{ minMode.text }}</option>
             </select>
           </div>
           <input type="text"

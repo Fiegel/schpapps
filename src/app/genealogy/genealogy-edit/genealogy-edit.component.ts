@@ -14,17 +14,24 @@ import { GenealogyService } from '../genealogy.service';
   styleUrls: ['./genealogy-edit.component.scss']
 })
 export class GenealogyEditComponent implements OnInit {
+  minModes = [
+    { value: 'day', text: '(date exacte)', format: 'DD/MM/YYYY' },
+    { value: 'month', text: '~ (mois)', format: 'MM/YYYY' },
+    { value: 'year', text: '~ (année)', format: 'YYYY' }
+  ];
+  defaultMinMode = this.minModes[0].value;
+
   showPersonEdit = false;
   showFamilyEdit = false;
 
   birthBsConfig: Partial<BsDatepickerConfig> = Object.assign({}, {
     containerClass: 'theme-red',
-    minMode: <BsDatepickerViewMode>'day',
+    minMode: <BsDatepickerViewMode>this.defaultMinMode,
     dateInputFormat: 'DD/MM/YYYY'
   });
   deathBsConfig: Partial<BsDatepickerConfig> = Object.assign({}, {
     containerClass: 'theme-red',
-    minMode: <BsDatepickerViewMode>'day',
+    minMode: <BsDatepickerViewMode>this.defaultMinMode,
     dateInputFormat: 'DD/MM/YYYY'
   });
 
@@ -79,12 +86,17 @@ export class GenealogyEditComponent implements OnInit {
     form.setValue({ ...form.value, 'deathDate': null });
   }
 
-  getDateFormatFromMinMode(minMode: BsDatepickerViewMode) {
-    switch (minMode) {
-      case 'day': return 'DD/MM/YYYY';
-      case 'month': return 'MM/YYYY';
-      case 'year': return 'YYYY';
+  getDateFormatFromMinMode(minMode: BsDatepickerViewMode): string {
+    let format: string;
+
+    for (const mm of this.minModes) {
+      if (mm.value === minMode.toString()) {
+        format = mm.format;
+        break;
+      }
     }
+
+    return format;
   }
 
   onGedFileSelected(event: any) {
