@@ -1,5 +1,6 @@
 export class Place {
-  constructor(public town?: string,
+  constructor(public id: number,
+    public town?: string,
     public areaCode?: string,
     public county?: string,
     public region?: string,

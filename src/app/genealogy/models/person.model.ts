@@ -1,7 +1,8 @@
 import { Place } from './place.model';
 
 export class Person {
-  constructor(public id: string,
+  constructor(public id: number,
+    public gedcomId?: string,
     public firstname?: string,
     public lastname?: string,
     public gender?: 'M' | 'F',

@@ -10,6 +10,9 @@ export class GedcomReaderService {
   private data: string[][] = [];
   private persons: Person[] = [];
   private families: Family[] = [];
+  private personsIdCounter = 1;
+  private familiesIdCounter = 1;
+  private placesIdCounter = 1; // TODO replace by get id from database
 
   constructor(private genealogyService: GenealogyService) { }
 
@@ -52,8 +55,8 @@ export class GedcomReaderService {
   }
 
   addPerson(data: string[]) {
-    const id = data[0].split(' ')[0];
-    const currentPerson = new Person(id);
+    const currentPerson = new Person(this.personsIdCounter++);
+    currentPerson.gedcomId = data[0].split(' ')[0];
 
     for (let i = 1; i < data.length; i++) {
       const tagSepIndex = data[i].indexOf(' ');
@@ -93,12 +96,12 @@ export class GedcomReaderService {
   private getPlace(data: string): Place {
     const placeData = data.substring(5).split(',');
 
-    return new Place(...placeData);
+    return new Place(this.placesIdCounter++, ...placeData);
   }
 
   private addFamily(data: string[]) {
-    const id = data[0].split(' ')[0];
-    const currentFamily = new Family(id);
+    const currentFamily = new Family(this.familiesIdCounter++);
+    currentFamily.gedcomId = data[0].split(' ')[0];
 
     for (let i = 1; i < data.length; i++) {
       const tagSepIndex = data[i].indexOf(' ');
@@ -106,20 +109,20 @@ export class GedcomReaderService {
       const value = data[i].slice(tagSepIndex + 1).replace(/[^a-zA-Z0-9_@ \-]/g, '');
 
       switch (tag) {
-        case 'HUSB': currentFamily.husband = this.findPersonById(value);
-          this.checkExistingPerson(currentFamily.husband, id);
+        case 'HUSB': currentFamily.husband = this.findPersonByGedcomId(value);
+          this.checkExistingPerson(currentFamily.husband, currentFamily.gedcomId);
           break;
-        case 'WIFE': currentFamily.wife = this.findPersonById(value);
-          this.checkExistingPerson(currentFamily.wife, id);
+        case 'WIFE': currentFamily.wife = this.findPersonByGedcomId(value);
+          this.checkExistingPerson(currentFamily.wife, currentFamily.gedcomId);
           break;
         case 'MARR': const marriage = this.getEventDateAndPlace(data, i);
           currentFamily.marriageDate = marriage.date;
           currentFamily.marriagePlace = marriage.place;
           break;
         case 'CHIL':
-          const newChild = this.findPersonById(value);
+          const newChild = this.findPersonByGedcomId(value);
           currentFamily.children ? currentFamily.children.push(newChild) : currentFamily.children = [newChild];
-          this.checkExistingPerson(newChild, id);
+          this.checkExistingPerson(newChild, currentFamily.gedcomId);
           break;
         case 'NOTE': currentFamily.note = this.getNote(value, data, i);
           break;
@@ -132,13 +135,13 @@ export class GedcomReaderService {
     this.families.push(currentFamily);
   }
 
-  private findPersonById(id: string): Person {
-    return this.persons.find((person) => person.id === id) || new Person(id);
+  private findPersonByGedcomId(gedcomId: string): Person {
+    return this.persons.find((person) => person.gedcomId === gedcomId) || <Person>{ id: this.personsIdCounter++, gedcomId };
   }
 
-  private checkExistingPerson(person: Person, familyId: string) {
-    if (person.id && !person.firstname && !person.lastname) {
-      console.log('Person unknown with id ' + person.id + ' for family id ' + familyId);
+  private checkExistingPerson(person: Person, familyGedcomId: string) {
+    if (person.gedcomId && !person.firstname && !person.lastname) {
+      console.log('Person unknown with gedcomId ' + person.gedcomId + ' for family gedcomId ' + familyGedcomId);
     }
   }
 

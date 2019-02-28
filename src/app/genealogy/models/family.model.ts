@@ -2,7 +2,8 @@ import { Person } from './person.model';
 import { Place } from './place.model';
 
 export class Family {
-  constructor(public id: string,
+  constructor(public id: number,
+    public gedcomId?: string,
     public husband?: Person,
     public wife?: Person,
     public marriageDate?: string,
