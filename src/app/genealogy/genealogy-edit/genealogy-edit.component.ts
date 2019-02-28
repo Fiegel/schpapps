@@ -2,11 +2,10 @@ import {
   BsDatepickerConfig, BsDatepickerViewMode
 } from 'ngx-bootstrap/datepicker/ngx-bootstrap-datepicker';
 
-import { convertMetaToOutput } from '@angular/compiler/src/render3/util';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 
-import { GenealogyService } from '../genealogy.service';
+import { GedcomReaderService } from '../gedcom-reader.service';
 
 @Component({
   selector: 'app-genealogy-edit',
@@ -41,7 +40,7 @@ export class GenealogyEditComponent implements OnInit {
   isBirthCalendarOpen = false;
   isDeathCalendarOpen = false;
 
-  constructor(private genealogyService: GenealogyService) { }
+  constructor(private gedcomReaderService: GedcomReaderService) { }
 
   ngOnInit() {
   }
@@ -105,7 +104,7 @@ export class GenealogyEditComponent implements OnInit {
       const file = event.target.files[0];
       reader.readAsText(file);
       reader.onload = () => {
-        this.genealogyService.setFileContent(reader.result.toString());
+        this.gedcomReaderService.setFileContent(reader.result.toString());
       };
     }
   }

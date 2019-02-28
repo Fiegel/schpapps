@@ -5,7 +5,7 @@ import { Person } from './models/person.model';
 import { Place } from './models/place.model';
 
 @Injectable()
-export class GenealogyService {
+export class GedcomReaderService {
   private data: string[][] = [];
   private persons: Person[] = [];
   private families: Family[] = [];
