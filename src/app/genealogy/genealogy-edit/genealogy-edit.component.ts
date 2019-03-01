@@ -1,3 +1,4 @@
+import moment from 'moment';
 import {
   BsDatepickerConfig, BsDatepickerViewMode
 } from 'ngx-bootstrap/datepicker/ngx-bootstrap-datepicker';
@@ -6,9 +7,6 @@ import { Subscription } from 'rxjs';
 
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import {
-  formArrayNameProvider
-} from '@angular/forms/src/directives/reactive_directives/form_group_name';
 
 import { GedcomReaderService } from '../gedcom-reader.service';
 import { GenealogyService } from '../genealogy.service';
@@ -87,6 +85,20 @@ export class GenealogyEditComponent implements OnInit, OnDestroy {
     }
   }
 
+  getDateFromForm(date: string, dateControl: string): string {
+    if (!date) {
+      return null;
+    }
+
+    const dateParsed = moment(date.toString().substring(0, 15), 'ddd MMM DD YYYY');
+
+    switch (dateControl) {
+      case 'year': return dateParsed.format('YYYY');
+      case 'month': return dateParsed.format('MM/YYYY');
+      default: return dateParsed.format('DD/MM/YYYY');
+    }
+  }
+
   onPersonSubmit(form: NgForm) {
     // TODO get other persons with same first/lastname in the db
     // and check with the user if they are not the same
@@ -95,6 +107,7 @@ export class GenealogyEditComponent implements OnInit, OnDestroy {
       firstname: form.value.firstname,
       lastname: form.value.lastname,
       gender: this.getGenderFromForm(form.value.gender),
+      birthDate: this.getDateFromForm(form.value.birthDate, form.value.birthDateControl),
       birthPlace: <Place>{
         town: form.value.birthPlaceTown,
         county: form.value.birthPlaceCounty,
@@ -102,6 +115,7 @@ export class GenealogyEditComponent implements OnInit, OnDestroy {
         region: form.value.birthPlaceRegion,
         country: form.value.birthPlaceCountry
       },
+      deathDate: this.getDateFromForm(form.value.deathDate, form.value.deathDateControl),
       deathPlace: <Place>{
         town: form.value.deathPlaceTown,
         county: form.value.deathPlaceCounty,
