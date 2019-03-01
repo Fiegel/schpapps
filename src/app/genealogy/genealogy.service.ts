@@ -10,8 +10,7 @@ export class GenealogyService {
   private persons: Person[] = [];
   private families: Family[] = [];
   private personsIdCounter = 1;
-  private familiesIdCounter = 1;
-  private placesIdCounter = 1; // TODO replace by get id from database
+  private familiesIdCounter = 1; // TODO replace by get id from database
 
   personsChanged = new Subject<Person[]>();
   familiesChanged = new Subject<Family[]>();
@@ -30,10 +29,6 @@ export class GenealogyService {
 
   getIncFamiliesIdCounter(): number {
     return this.familiesIdCounter++;
-  }
-
-  getIncPlacesIdCounter(): number {
-    return this.placesIdCounter++;
   }
 
   addPerson(person: Person) {

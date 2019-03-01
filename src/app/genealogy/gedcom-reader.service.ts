@@ -93,7 +93,7 @@ export class GedcomReaderService {
   private getPlace(data: string): Place {
     const placeData = data.substring(5).split(',');
 
-    return new Place(this.genealogyService.getIncPlacesIdCounter(), ...placeData);
+    return new Place(...placeData);
   }
 
   private addFamily(data: string[]) {

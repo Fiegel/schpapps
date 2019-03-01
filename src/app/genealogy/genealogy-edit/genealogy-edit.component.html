@@ -43,7 +43,7 @@
            (click)="onPersonEditClick()"><i class="fas fa-times"></i></a>
       </div>
     </div>
-    <div class="row">
+    <div class="form-row">
       <div class="col-12 col-sm-6 form-group">
         <label for="lastname">Nom</label>
         <input type="text"
@@ -61,7 +61,7 @@
                ngModel>
       </div>
     </div>
-    <div class="row">
+    <div class="form-row">
       <div class="col-12 form-group">
         <label for="gender">Sexe</label><br>
         <div class="btn-group"
@@ -98,7 +98,7 @@
         </div>
       </div>
     </div>
-    <div class="row">
+    <div class="form-row">
       <div class="col-12 col-sm-6 form-group">
         <label for="birthDate">Date de naissance</label>
         <div class="input-group">
@@ -130,16 +130,6 @@
         </div>
       </div>
       <div class="col-12 col-sm-6 form-group">
-        <label for="birthPlace">Lieu de naissance</label>
-        <input type="text"
-               id="birthPlace"
-               class="form-control"
-               name="birthPlace"
-               ngModel>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-12 col-sm-6 form-group">
         <label for="deathDate">Date de décès</label>
         <div class="input-group">
           <div class="input-group-prepend">
@@ -169,12 +159,130 @@
           </div>
         </div>
       </div>
-      <div class="col-12 col-sm-6 form-group">
-        <label for="deathPlace">Lieu de décès</label>
+    </div>
+    <div class="form-row">
+      <div class="col-12">
+        <label for="birthPlace">Lieu de naissance</label>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="col-12 col-md-6 col-lg-3 form-group">
         <input type="text"
-               id="deathPlace"
+               id="birthPlaceTown"
                class="form-control"
-               name="deathPlace"
+               name="birthPlaceTown"
+               placeholder="Ville"
+               ngModel>
+      </div>
+      <div class="col-12 col-md-6 col-lg-3 form-group">
+        <div class="input-group">
+          <input type="text"
+                 id="birthPlaceCounty"
+                 class="form-control"
+                 name="birthPlaceCounty"
+                 placeholder="Département"
+                 autocomplete="off"
+                 [typeahead]="franceDepts"
+                 typeaheadOptionField="name"
+                 [typeaheadScrollable]="true"
+                 [typeaheadOptionsInScrollableView]="5"
+                 ngModel>
+          <div class="input-group-append">
+            <input type="text"
+                   id="birthPlaceAreaCode"
+                   class="form-control"
+                   name="birthPlaceAreaCode"
+                   placeholder="N°"
+                   autocomplete="off"
+                   [typeahead]=franceDepts
+                   typeaheadOptionField="code"
+                   [typeaheadScrollable]="true"
+                   [typeaheadOptionsInScrollableView]="5"
+                   ngModel>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 col-md-6 col-lg-3 form-group">
+        <input type="text"
+               id="birthPlaceRegion"
+               class="form-control"
+               name="birthPlaceRegion"
+               placeholder="Région"
+               autocomplete="off"
+               [typeahead]="franceRegions"
+               [typeaheadScrollable]="true"
+               [typeaheadOptionsInScrollableView]="5"
+               ngModel>
+      </div>
+      <div class="col-12 col-md-6 col-lg-3 form-group">
+        <input type="text"
+               id="birthPlaceCountry"
+               class="form-control"
+               name="birthPlaceCountry"
+               placeholder="Pays"
+               ngModel>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="col-12">
+        <label for="deathPlace">Lieu de décès</label>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="col-12 col-md-6 col-lg-3 form-group">
+        <input type="text"
+               id="deathPlaceTown"
+               class="form-control"
+               name="deathPlaceTown"
+               placeholder="Ville"
+               ngModel>
+      </div>
+      <div class="col-12 col-md-6 col-lg-3 form-group">
+        <div class="input-group">
+          <input type="text"
+                 id="deathPlaceCounty"
+                 class="form-control"
+                 name="deathPlaceCounty"
+                 placeholder="Département"
+                 autocomplete="off"
+                 [typeahead]="franceDepts"
+                 typeaheadOptionField="name"
+                 [typeaheadScrollable]="true"
+                 [typeaheadOptionsInScrollableView]="5"
+                 ngModel>
+          <div class="input-group-append">
+            <input type="text"
+                   id="deathPlaceAreaCode"
+                   class="form-control"
+                   name="deathPlaceAreaCode"
+                   placeholder="N°"
+                   autocomplete="off"
+                   [typeahead]=franceDepts
+                   typeaheadOptionField="code"
+                   [typeaheadScrollable]="true"
+                   [typeaheadOptionsInScrollableView]="5"
+                   ngModel>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 col-md-6 col-lg-3 form-group">
+        <input type="text"
+               id="deathPlaceRegion"
+               class="form-control"
+               name="deathPlaceRegion"
+               placeholder="Région"
+               autocomplete="off"
+               [typeahead]="franceRegions"
+               [typeaheadScrollable]="true"
+               [typeaheadOptionsInScrollableView]="5"
+               ngModel>
+      </div>
+      <div class="col-12 col-md-6 col-lg-3 form-group">
+        <input type="text"
+               id="deathPlaceCountry"
+               class="form-control"
+               name="deathPlaceCountry"
+               placeholder="Pays"
                ngModel>
       </div>
     </div>

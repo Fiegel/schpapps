@@ -1,5 +1,6 @@
 import { ButtonsModule } from 'ngx-bootstrap/buttons';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+import { TypeaheadModule } from 'ngx-bootstrap/typeahead';
 
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -21,6 +22,7 @@ import { GenealogyService } from './genealogy.service';
     GenealogyRoutingModule,
     ButtonsModule.forRoot(),
     BsDatepickerModule.forRoot(),
+    TypeaheadModule.forRoot(),
     SharedModule
   ],
   providers: [

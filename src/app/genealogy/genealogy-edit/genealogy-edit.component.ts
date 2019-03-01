@@ -10,6 +10,7 @@ import { GedcomReaderService } from '../gedcom-reader.service';
 import { GenealogyService } from '../genealogy.service';
 import { Family } from '../models/family.model';
 import { Person } from '../models/person.model';
+import { FRANCE_DEPTS, FRANCE_REGIONS, Place } from '../models/place.model';
 
 @Component({
   selector: 'app-genealogy-edit',
@@ -17,6 +18,9 @@ import { Person } from '../models/person.model';
   styleUrls: ['./genealogy-edit.component.scss']
 })
 export class GenealogyEditComponent implements OnInit, OnDestroy {
+  franceRegions = FRANCE_REGIONS;
+  franceDepts = FRANCE_DEPTS;
+
   minModes = [
     { value: 'day', text: '(date exacte)', format: 'DD/MM/YYYY' },
     { value: 'month', text: '~ (mois)', format: 'MM/YYYY' },
@@ -79,6 +83,20 @@ export class GenealogyEditComponent implements OnInit, OnDestroy {
       firstname: form.value.firstname,
       lastname: form.value.lastname,
       gender: this.getGenderFromForm(form.value.gender),
+      birthPlace: <Place>{
+        town: form.value.birthPlaceTown,
+        county: form.value.birthPlaceCounty,
+        areaCode: form.value.birthPlaceAreaCode,
+        region: form.value.birthPlaceRegion,
+        country: form.value.birthPlaceCountry
+      },
+      deathPlace: <Place>{
+        town: form.value.deathPlaceTown,
+        county: form.value.deathPlaceCounty,
+        areaCode: form.value.deathPlaceAreaCode,
+        region: form.value.deathPlaceRegion,
+        country: form.value.deathPlaceCountry
+      },
       occupation: form.value.occupation,
       note: form.value.note
     });
