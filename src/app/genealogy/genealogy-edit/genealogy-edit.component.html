@@ -186,6 +186,7 @@
                  typeaheadOptionField="name"
                  [typeaheadScrollable]="true"
                  [typeaheadOptionsInScrollableView]="5"
+                 (typeaheadOnSelect)="onCountySelect($event, 'birth', formPerson)"
                  ngModel>
           <div class="input-group-append">
             <input type="text"
@@ -198,6 +199,7 @@
                    typeaheadOptionField="code"
                    [typeaheadScrollable]="true"
                    [typeaheadOptionsInScrollableView]="5"
+                   readonly
                    ngModel>
           </div>
         </div>
@@ -249,6 +251,7 @@
                  typeaheadOptionField="name"
                  [typeaheadScrollable]="true"
                  [typeaheadOptionsInScrollableView]="5"
+                 (typeaheadOnSelect)="onCountySelect($event, 'death', formPerson)"
                  ngModel>
           <div class="input-group-append">
             <input type="text"
@@ -261,6 +264,7 @@
                    typeaheadOptionField="code"
                    [typeaheadScrollable]="true"
                    [typeaheadOptionsInScrollableView]="5"
+                   readonly
                    ngModel>
           </div>
         </div>

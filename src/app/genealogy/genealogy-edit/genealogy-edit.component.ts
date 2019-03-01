@@ -1,10 +1,14 @@
 import {
   BsDatepickerConfig, BsDatepickerViewMode
 } from 'ngx-bootstrap/datepicker/ngx-bootstrap-datepicker';
+import { TypeaheadMatch } from 'ngx-bootstrap/typeahead/public_api';
 import { Subscription } from 'rxjs';
 
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import {
+  formArrayNameProvider
+} from '@angular/forms/src/directives/reactive_directives/form_group_name';
 
 import { GedcomReaderService } from '../gedcom-reader.service';
 import { GenealogyService } from '../genealogy.service';
@@ -73,6 +77,14 @@ export class GenealogyEditComponent implements OnInit, OnDestroy {
     this.isGenderMaleRadioActive = event.srcElement.id === 'genderMale';
     this.isGenderFemaleRadioActive = event.srcElement.id === 'genderFemale';
     this.isGenderUnknownRadioActive = event.srcElement.id === 'genderUnknown';
+  }
+
+  onCountySelect(event: TypeaheadMatch, eventType: 'birth' | 'death', form: NgForm) {
+    if (eventType === 'birth') {
+      form.setValue({ ...form.value, birthPlaceAreaCode: event.item.code });
+    } else {
+      form.setValue({ ...form.value, deathPlaceAreaCode: event.item.code });
+    }
   }
 
   onPersonSubmit(form: NgForm) {
