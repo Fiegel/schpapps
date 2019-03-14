@@ -1,3 +1,4 @@
+import { AgGridModule } from 'ag-grid-angular';
 import { ButtonsModule } from 'ngx-bootstrap/buttons';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { TypeaheadModule } from 'ngx-bootstrap/typeahead';
@@ -8,15 +9,16 @@ import { FormsModule } from '@angular/forms';
 import { SharedModule } from '../shared/shared.module';
 import { GedcomReaderService } from './gedcom-reader.service';
 import { GenealogyEditComponent } from './genealogy-edit/genealogy-edit.component';
+import { GenealogyGridComponent } from './genealogy-grid/genealogy-grid.component';
 import { GenealogyRoutingModule } from './genealogy-routing.module';
 import { GenealogyComponent } from './genealogy.component';
 import { GenealogyService } from './genealogy.service';
-import { AgGridModule } from 'ag-grid-angular';
 
 @NgModule({
   declarations: [
     GenealogyComponent,
-    GenealogyEditComponent
+    GenealogyEditComponent,
+    GenealogyGridComponent
   ],
   imports: [
     FormsModule,

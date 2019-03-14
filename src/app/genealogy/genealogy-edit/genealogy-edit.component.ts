@@ -3,14 +3,12 @@ import {
   BsDatepickerConfig, BsDatepickerViewMode
 } from 'ngx-bootstrap/datepicker/ngx-bootstrap-datepicker';
 import { TypeaheadMatch } from 'ngx-bootstrap/typeahead/public_api';
-import { Subscription } from 'rxjs';
 
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { NgForm } from '@angular/forms';
 
 import { GedcomReaderService } from '../gedcom-reader.service';
 import { GenealogyService } from '../genealogy.service';
-import { Family } from '../models/family.model';
 import { Person } from '../models/person.model';
 import { FRANCE_DEPTS, FRANCE_REGIONS, Place } from '../models/place.model';
 
@@ -19,7 +17,7 @@ import { FRANCE_DEPTS, FRANCE_REGIONS, Place } from '../models/place.model';
   templateUrl: './genealogy-edit.component.html',
   styleUrls: ['./genealogy-edit.component.scss']
 })
-export class GenealogyEditComponent implements OnInit, OnDestroy {
+export class GenealogyEditComponent {
   franceRegions = FRANCE_REGIONS;
   franceDepts = FRANCE_DEPTS;
 
@@ -50,18 +48,8 @@ export class GenealogyEditComponent implements OnInit, OnDestroy {
   isBirthCalendarOpen = false;
   isDeathCalendarOpen = false;
 
-  personsChangedSubscription: Subscription;
-  familiesChangedSubscription: Subscription;
-
   constructor(private gedcomReaderService: GedcomReaderService,
     private genealogyService: GenealogyService) { }
-
-  ngOnInit() {
-    this.personsChangedSubscription = this.genealogyService.personsChanged
-      .subscribe((persons: Person[]) => console.log(persons));
-    this.familiesChangedSubscription = this.genealogyService.familiesChanged
-      .subscribe((families: Family[]) => console.log(families));
-  }
 
   onPersonEditClick() {
     this.showPersonEdit = !this.showPersonEdit;
@@ -179,10 +167,5 @@ export class GenealogyEditComponent implements OnInit, OnDestroy {
     } else {
       return null;
     }
-  }
-
-  ngOnDestroy() {
-    this.personsChangedSubscription.unsubscribe();
-    this.familiesChangedSubscription.unsubscribe();
   }
 }
