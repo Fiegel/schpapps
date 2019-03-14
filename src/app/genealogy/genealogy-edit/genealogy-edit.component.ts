@@ -100,8 +100,6 @@ export class GenealogyEditComponent implements OnInit, OnDestroy {
   }
 
   onPersonSubmit(form: NgForm) {
-    // TODO get other persons with same first/lastname in the db
-    // and check with the user if they are not the same
     this.genealogyService.addPerson(<Person>{
       id: this.genealogyService.getIncPersonsIdCounter(),
       firstname: form.value.firstname,
