@@ -11,6 +11,7 @@ import { GenealogyEditComponent } from './genealogy-edit/genealogy-edit.componen
 import { GenealogyRoutingModule } from './genealogy-routing.module';
 import { GenealogyComponent } from './genealogy.component';
 import { GenealogyService } from './genealogy.service';
+import { AgGridModule } from 'ag-grid-angular';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { GenealogyService } from './genealogy.service';
     ButtonsModule.forRoot(),
     BsDatepickerModule.forRoot(),
     TypeaheadModule.forRoot(),
+    AgGridModule.withComponents([]),
     SharedModule
   ],
   providers: [
